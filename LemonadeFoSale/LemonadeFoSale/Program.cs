@@ -10,6 +10,7 @@ namespace LemonadeFoSale
     {
         static void Main(string[] args)
         {
+            UI.DisplayTitleArt();
         }
     }
 }
