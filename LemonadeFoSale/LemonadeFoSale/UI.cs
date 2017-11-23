@@ -9,63 +9,48 @@ namespace LemonadeFoSale
     static class UI
     {
         //member variables
-        static string userInput;
+        static public string userInput;
         static List<ConsoleColor> titleColors = new List<ConsoleColor>() { ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Cyan, ConsoleColor.Magenta, ConsoleColor.Red, ConsoleColor.Blue };
 
         //constructor
 
 
+
         //member methods
-        static public void DisplayTitleArt()
+
+        static public void TitleLoop()
         {
 
-            Console.ForegroundColor = TitleColorRandomizer();
-            Console.WriteLine("   _      _____ ___  ___ _____  _   _   ___  ______  _____   ");
-            Console.WriteLine(@"  | |    |  ___||  \/  ||  _  || \ | | / _ \ |  _  \|  ___| ");
-            Console.ResetColor();
-            System.Threading.Thread.Sleep(500);
-            Console.ForegroundColor = TitleColorRandomizer();
-            Console.WriteLine(@"  | |    | |__  | .  . || | | ||  \| |/ /_\ \| | | || |__   ");
-            Console.ResetColor();
-            System.Threading.Thread.Sleep(500);
-            Console.ForegroundColor = TitleColorRandomizer();
-            Console.WriteLine(@"  | |    |  __| | |\/| || | | || . \ ||  _  || | | ||  __|  ");
-            Console.WriteLine(@"  | |____| |___ | |  | |\ \_/ /| |\  || | | || |/  /| |___  ");
-            Console.ResetColor();
-            System.Threading.Thread.Sleep(500);
-            Console.ForegroundColor = TitleColorRandomizer();
-            Console.WriteLine(@"  \_____/\____/ \_|  |_/ \___/ \_| \_/\_| |_/|___./ \____/  ");
-            Console.WriteLine(@"                                                          ");
-            Console.WriteLine(@"                                                          ");
-            Console.ResetColor();
-            System.Threading.Thread.Sleep(500);
-            Console.ForegroundColor = TitleColorRandomizer();
-            Console.WriteLine(@"                       _____  _____   ___   _   _ ______  ");
-            Console.WriteLine(@"                      /  ___||_   _| / _ \ | \ | ||  _  \ ");
-            Console.WriteLine(@"                      \  `--.  | |  / /_\ \|  \| || | | | ");
-            Console.ResetColor();
-            System.Threading.Thread.Sleep(500);
-            Console.ForegroundColor = TitleColorRandomizer();
-            Console.WriteLine(@"                       `--.  \ | |  |  _  || . \ || | | | ");
-            Console.WriteLine(@"                      /\__/  / | |  | | | || |\  || |/  /  ");
-            Console.ResetColor();
-            System.Threading.Thread.Sleep(500);
-            Console.ForegroundColor = TitleColorRandomizer();
-            Console.WriteLine(@"                      \____./  \_/  \_| |_/\_| \_/|___./   ");
-            Console.WriteLine("                                                            ");
-            Console.ResetColor();
-            System.Threading.Thread.Sleep(500);
-            Console.ForegroundColor = TitleColorRandomizer();
-            Console.WriteLine("                                         an Erik White joint  ");
-            Console.WriteLine("  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            Console.ResetColor();
-            System.Threading.Thread.Sleep(1500);
-            Console.WriteLine("\n         Press any key to continue.");
+            List <string> titleScroll = new List <string> () { };
+            titleScroll.Add("   _      _____ ___  ___ _____  _   _   ___  ______  _____   ");
+            titleScroll.Add(@"  | |    |  ___||  \/  ||  _  || \ | | / _ \ |  _  \|  ___| ");
+            titleScroll.Add(@"  | |    | |__  | .  . || | | ||  \| |/ /_\ \| | | || |__   ");
+            titleScroll.Add(@"  | |    |  __| | |\/| || | | || . \ ||  _  || | | ||  __|  ");
+            titleScroll.Add(@"  | |____| |___ | |  | |\ \_/ /| |\  || | | || |/  /| |___  ");
+            titleScroll.Add(@"  \_____/\____/ \_|  |_/ \___/ \_| \_/\_| |_/|___./ \____/  ");
+            titleScroll.Add(@"                                                            ");            
+            titleScroll.Add(@"                       _____  _____   ___   _   _ ______    ");
+            titleScroll.Add(@"                      /  ___||_   _| / _ \ | \ | ||  _  \   ");
+            titleScroll.Add(@"                      \  `--.  | |  / /_\ \|  \| || | | |   ");
+            titleScroll.Add(@"                       `--.  \ | |  |  _  || . \ || | | |   ");
+            titleScroll.Add(@"                      /\__/  / | |  | | | || |\  || |/  /   ");
+            titleScroll.Add(@"                      \____./  \_/  \_| |_/\_| \_/|___./    ");
+            titleScroll.Add("                                                             ");
+            titleScroll.Add("                                        an Erik White joint  ");
+            titleScroll.Add("  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            for (int i = 0; i <= titleScroll.Count()-1; i++)
+            {
+                Console.ForegroundColor = TitleColorRandomizer();
+                Console.WriteLine(titleScroll[i]);
+                Console.ResetColor();
+                System.Threading.Thread.Sleep(425);
+            }
+            System.Threading.Thread.Sleep(1150);
+            Console.WriteLine("\n                 Press Any Key To Continue");
             userInput = Console.ReadKey(true).KeyChar.ToString();
 
-
         }
-
+        
         static public ConsoleColor TitleColorRandomizer()
         {
             Random rndColor = new Random();
