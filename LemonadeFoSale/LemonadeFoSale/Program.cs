@@ -10,7 +10,7 @@ namespace LemonadeFoSale
     {
         static void Main(string[] args)
         {
-            UI.TitleLoop();
+            Game StartGame = new Game();
         }
     }
 }

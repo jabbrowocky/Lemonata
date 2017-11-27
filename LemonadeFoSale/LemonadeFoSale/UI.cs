@@ -18,7 +18,7 @@ namespace LemonadeFoSale
 
         //member methods
 
-        static public void TitleLoop()
+        public static void DisplayTitleLoop(Game game)
         {
 
             List<string> titleScroll = new List<string>() { };
@@ -57,7 +57,8 @@ namespace LemonadeFoSale
             Console.ResetColor();
 
             Console.ReadKey(true);
-            MainMenu();
+            DisplayMainMenu(game);
+            
             
 
         }
@@ -73,37 +74,42 @@ namespace LemonadeFoSale
             return ConsoleColor.Yellow;
         }
 
-        static public void MainMenu()
+        static public void DisplayMainMenu(Game game)
         {
             Console.Clear();
             Console.WriteLine("\n\n Lemonade Stand Main Menu");
             Console.WriteLine(" ------------------------\n\n Rules:(enter 'r')");
-            Console.WriteLine("\n Set Game Parameters: (enter 'o')");
             Console.WriteLine("\n Start Game: (enter 's')");
             Console.WriteLine("\n Quit Game: (enter 'q')");
             userInput = Console.ReadKey(true).KeyChar.ToString();
             switch (userInput)
             {
                 case ("r"):
-                    DisplayRules();
-                    break;
-                case ("o"):
-                    break;
+                    DisplayRules(game);
+                    break;                
                 case ("s"):
+                    game.RunGame(game.SetNumberOfDays(), game.GetPlayerName());
                     break;
                 case ("q"):
                     break;
                 default:
+                    Console.WriteLine("That is not a valid input.");
+                    DisplayMainMenu(game);
                     break;
 
             }
         }
-        static public void DisplayRules()
+        static public void DisplayRules(Game game)
         {
-
+            Console.Clear();
+            Console.WriteLine("The rules are fairly simple:\n\n 1: Run your lemonade stand as you choose.\n 2: Play for 7, 14, or 30 'days'.\n 3: Purchase your inventory; cups, sugar, lemons.\n 4: See if you can turn a profit.\n Note: Weather will affect your client base, as will the mixture of your lemonade and the price.");
+            Console.WriteLine("\n Please press any key to return to main menu.");
+            Console.ReadKey();
+            DisplayMainMenu(game);
         }
         
         
         
+                
     }
 }

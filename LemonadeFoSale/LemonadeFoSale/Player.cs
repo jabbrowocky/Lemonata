@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace LemonadeFoSale
 {
-    class Player
+    public class Player
     {
         //member variables
-        string playerName;
+        public string playerName;
         Inventory playerStock;
         double availableFunds;
 
