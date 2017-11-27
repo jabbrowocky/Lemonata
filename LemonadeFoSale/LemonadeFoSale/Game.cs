@@ -6,15 +6,24 @@ using System.Threading.Tasks;
 
 namespace LemonadeFoSale
 {
-    class Game
+    public class Game
     {
         //member variables
         Weather weatherType;
         int dayNumber;
+        int NumberOfDays;
 
         //constructor
+        public Game(int NumberOfDays, Weather weatherType)
+        {
 
+        }
 
         //member methods
+
+        public void RunGame()
+        {
+
+        }
     }
 }

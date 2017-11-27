@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeFoSale
 {
-    class Weather
+    public class Weather
     {
         //member variables
 
