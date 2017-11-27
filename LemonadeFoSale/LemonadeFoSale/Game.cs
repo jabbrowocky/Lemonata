@@ -9,21 +9,19 @@ namespace LemonadeFoSale
     public class Game
     {
         //member variables
-        Weather weatherType;
+        public Weather TodaysWeather;
         int dayNumber;
         public int NumberOfDays;
         Player playerOne;
-       
         
+
+
 
         //constructor
         public Game()
         {
             playerOne = new Player();
-            UI.DisplayTitleLoop(this);
-            
-            
-            
+            UI.DisplayTitleLoop(this);                   
             
         }
 
@@ -32,14 +30,17 @@ namespace LemonadeFoSale
         public void RunGame(int Days, string name)
         {
             Console.Clear();
-            Console.WriteLine(" Let's simulate a lemonade stand!");
+            Console.WriteLine(" Let's simulate a lemonade stand {0}!\n", name);
+            TodaysWeather = new Weather();
+            Console.ReadLine();
+            
             
         }
         
         
         public string GetPlayerName()
         {
-            Console.WriteLine(" Please enter player name: ");
+            Console.WriteLine("\n Please enter player name: \n");
             playerOne.playerName = Console.ReadLine();
             return playerOne.playerName;
             
@@ -47,11 +48,12 @@ namespace LemonadeFoSale
         public int SetNumberOfDays()
         {
 
-            int numberOfDays;
-            Console.WriteLine(" Please set the number of days (7, 14, or 21)");
-            numberOfDays = int.Parse(Console.ReadKey().KeyChar.ToString());
+            int numberOfDays;                      
+            numberOfDays = int.Parse(UI.ValidateInput("\n Please set the number of days (7, 14, or 21)" , new List<string>() {"7","14","21" }));
             NumberOfDays = numberOfDays;
+            
             return NumberOfDays;
+
            
         }
         

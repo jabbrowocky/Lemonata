@@ -51,7 +51,7 @@ namespace LemonadeFoSale
             }
 
 
-            System.Threading.Thread.Sleep(1100);
+            System.Threading.Thread.Sleep(750);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\n                 Press Any Key To Continue\n");
             Console.ResetColor();
@@ -81,35 +81,61 @@ namespace LemonadeFoSale
             Console.WriteLine(" ------------------------\n\n Rules:(enter 'r')");
             Console.WriteLine("\n Start Game: (enter 's')");
             Console.WriteLine("\n Quit Game: (enter 'q')");
-            userInput = Console.ReadKey(true).KeyChar.ToString();
+            userInput = GetUserInput();
+            MainMenuLogic(game, userInput);
+
+            
+            
+        }
+        static public void MainMenuLogic(Game game, string userInput)
+        {
             switch (userInput)
             {
+                
                 case ("r"):
                     DisplayRules(game);
-                    break;                
+                break;                
                 case ("s"):
+                    Console.Clear();
                     game.RunGame(game.SetNumberOfDays(), game.GetPlayerName());
-                    break;
+                break;
                 case ("q"):
                     break;
                 default:
                     Console.WriteLine("That is not a valid input.");
-                    DisplayMainMenu(game);
-                    break;
+                DisplayMainMenu(game);
+                break;
 
             }
         }
+        static public string GetUserInput()
+        {
+            return Console.ReadLine();
+        }
+
         static public void DisplayRules(Game game)
         {
             Console.Clear();
-            Console.WriteLine("The rules are fairly simple:\n\n 1: Run your lemonade stand as you choose.\n 2: Play for 7, 14, or 30 'days'.\n 3: Purchase your inventory; cups, sugar, lemons.\n 4: See if you can turn a profit.\n Note: Weather will affect your client base, as will the mixture of your lemonade and the price.");
+            Console.WriteLine("The rules are fairly simple:\n\n 1: Run your lemonade stand as you choose.\n 2: Play for 7, 14, or 21 'days'.\n 3: Purchase your inventory; cups, sugar, lemons.\n 4: See if you can turn a profit.\n Note: Weather will affect your client base, as will the mixture of your lemonade and the price.");
             Console.WriteLine("\n Please press any key to return to main menu.");
-            Console.ReadKey();
+            Console.ReadKey(true);
             DisplayMainMenu(game);
         }
-        
-        
-        
+
+
+        static public string ValidateInput(string instruction, List<string> validInput)
+        {
+            Console.WriteLine(instruction);
+            userInput = Console.ReadLine();
+            if (!validInput.Contains(userInput))
+            {
+                Console.WriteLine("That is not a valid input, please enter a valid input.");
+                Console.Clear();
+                ValidateInput(instruction, validInput);
+                
+            }
+            return userInput;
+        }
                 
     }
 }

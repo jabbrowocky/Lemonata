@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeFoSale
 {
-    class Inventory
+    public class Inventory
     {
         //member variables
 

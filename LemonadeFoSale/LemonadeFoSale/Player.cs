@@ -10,8 +10,8 @@ namespace LemonadeFoSale
     {
         //member variables
         public string playerName;
-        Inventory playerStock;
-        double availableFunds;
+        protected Inventory playerStock;
+        protected double availableFunds;
 
         //constructor
 
