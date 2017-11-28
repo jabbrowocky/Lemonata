@@ -57,6 +57,7 @@ namespace LemonadeFoSale
             Console.ResetColor();
 
             Console.ReadKey(true);
+            musicplayer.StopMenuMusic(new System.Media.SoundPlayer());
             DisplayMainMenu(game);
             
             

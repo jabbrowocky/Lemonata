@@ -10,7 +10,7 @@ namespace LemonadeFoSale
     {
         //member variables
         public Weather TodaysWeather;
-        int dayNumber;
+        int dayNumber = 0;
         public int NumberOfDays;
         Player playerOne;
         
@@ -20,7 +20,7 @@ namespace LemonadeFoSale
         //constructor
         public Game()
         {
-            playerOne = new Player();
+            playerOne = new Player(35.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cup>()));
             UI.DisplayTitleLoop(this);                   
             
         }
@@ -32,11 +32,16 @@ namespace LemonadeFoSale
             Console.Clear();
             Console.WriteLine(" Let's simulate a lemonade stand {0}!\n", name);
             TodaysWeather = new Weather();
+            DisplayPlayerInventory(playerOne);
             Console.ReadLine();
             
             
         }
         
+        public void RunStore()
+        {
+            Store gameStore = new Store();
+        }
         
         public string GetPlayerName()
         {
@@ -56,6 +61,20 @@ namespace LemonadeFoSale
 
            
         }
+
+        public void DisplayPlayerInventory(Player player)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n{0}'s Current Stock\n*****************************\n", player.playerName);
+            Console.ResetColor();
+            Console.WriteLine("Lemons: " + player.playerStock.Lemons.Count);
+            Console.WriteLine("Cups of Sugar: " + player.playerStock.cupsOfSugar.Count);
+            Console.WriteLine("Paper Cups: " + player.playerStock.numberOfCups.Count);
+            Console.WriteLine("\nAvailable Funds: " + "$" + player.availableFunds);
+
+
+        }
+        
         
     }
 }

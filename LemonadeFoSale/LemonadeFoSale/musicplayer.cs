@@ -20,5 +20,9 @@ namespace LemonadeFoSale
             titleLoop.PlayLooping();
                
         }
+        static public void StopMenuMusic(System.Media.SoundPlayer titleLoop)
+        {
+            titleLoop.Stop();
+        }
     }
 }

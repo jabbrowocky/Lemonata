@@ -10,12 +10,18 @@ namespace LemonadeFoSale
     {
         //member variables
         public string playerName;
-        protected Inventory playerStock;
-        protected double availableFunds;
+        public Inventory playerStock;
+        public double availableFunds;
 
         //constructor
-
+        public Player(double availableFunds, Inventory playerStock)
+        {
+            this.availableFunds = availableFunds;
+            this.playerStock = playerStock;
+        }
 
         //member methods
+        
+
     }
 }
