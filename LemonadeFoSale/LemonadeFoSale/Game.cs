@@ -70,6 +70,7 @@ namespace LemonadeFoSale
 
         public void DisplayPlayerInventory(Player player)
         {
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\n{0}'s Current Stock\n*****************************\n", player.playerName);
             Console.ResetColor();
