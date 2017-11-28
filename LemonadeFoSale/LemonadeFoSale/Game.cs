@@ -33,15 +33,21 @@ namespace LemonadeFoSale
             Console.WriteLine(" Let's simulate a lemonade stand {0}!\n", name);
             TodaysWeather = new Weather();
             DisplayPlayerInventory(playerOne);
+            Console.WriteLine("Press Enter to access store.");
             Console.ReadLine();
+            RunStore(new Store());
             
             
         }
         
-        public void RunStore()
+        public void RunStore(Store store)
         {
-            Store gameStore = new Store();
+            Console.Clear();
+            store.DisplayStore(playerOne);
+            DisplayPlayerInventory(playerOne);
+            Console.ReadLine();
         }
+        
         
         public string GetPlayerName()
         {

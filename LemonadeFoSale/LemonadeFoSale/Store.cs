@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeFoSale
 {
-    class Store
+    public class Store
     {
 
         //member variables
@@ -20,31 +20,63 @@ namespace LemonadeFoSale
 
         //member methods
 
-        public void DisplayStore()
+        public void DisplayStore(Player player)
         {
             Console.WriteLine("Welcome to the store");
             Console.WriteLine("\n Purchase lemons: Press 'l'");
             Console.WriteLine("\n Purchase cups of sugar: Press 's'");
             Console.WriteLine("\n Purchase paper cups Press 'p'");
+            Console.WriteLine("Available Income: " + "$" + player.availableFunds);
+            string userInput = Console.ReadLine();
+            GetStoreLogic(userInput, player);
+            
         }
-        public void StoreLogic()
+        public void GetStoreLogic(string userInput, Player player)
         {
-
+            switch (userInput)
+            {
+                case "l":
+                    Console.WriteLine("Purchase how many lemons? enter a number.");
+                    
+                    int userSelection = int.Parse(Console.ReadLine());
+                    PurchaseItems(userSelection, PurchaseLemons, player);
+                    break;
+                case "s":
+                    Console.WriteLine("Purchase how many cups of sugar?");
+                    break;
+                case "p":
+                    Console.WriteLine("Purchase how many paper cups?");
+                    break;
+                default:
+                    Console.Clear();
+                    DisplayStore(player);
+                    break;
+            }
         }
-        public void PurchaseLemons(Player player, Lemon lemon)
+        public void PurchaseItems(int UserInput, Action<Player> callback, Player player)
         {
-            player.playerStock.Lemons.Add(new Lemon());
+            for (int i = 0; i <= UserInput; i++)
+            {
+                callback(player);
+            }
+        }
+        public void PurchaseLemons(Player player)
+        {
+            Lemon lemon = new Lemon();
+            player.playerStock.Lemons.Add(lemon);
             player.availableFunds -= lemon.UnitPrice;
         }
-        public void PurchaseSugar(Player player, Sugar sugar)
+        public void PurchaseSugar(Player player)
         {
-            player.playerStock.cupsOfSugar.Add(new Sugar());
+            Sugar sugar = new Sugar();
+            player.playerStock.cupsOfSugar.Add(sugar);
             player.availableFunds -= sugar.unitPrice;
         }
-        public void PurchaseCups(Player player, Cup cups)
+        public void PurchaseCups(Player player)
         {
-            player.playerStock.numberOfCups.Add(new Cup());
-            player.availableFunds -= cups.unitPrice;
+            Cup cup = new Cup();
+            player.playerStock.numberOfCups.Add(cup);
+            player.availableFunds -= cup.unitPrice;
         }
     }
 }
