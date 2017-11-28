@@ -137,6 +137,23 @@ namespace LemonadeFoSale
             }
             return userInput;
         }
-                
+        public static int GetUserIntegerInRange(string instruction, int min, int max)
+        {
+            Console.WriteLine(instruction);
+            string userSelection = Console.ReadLine();
+            int userSelectionNumber;
+            if (!int.TryParse(userSelection, out userSelectionNumber) || !(userSelectionNumber >= min) || !(userSelectionNumber <= max))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Sorry, that is not a valid number. Please enter a number between {0} and {1}.", min, max);
+                Console.ResetColor();
+                return GetUserIntegerInRange(instruction, min, max);
+            }
+            else
+            {
+                return userSelectionNumber;
+            }
+        }
+
     }
 }

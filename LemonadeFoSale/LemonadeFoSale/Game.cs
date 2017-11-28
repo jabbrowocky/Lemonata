@@ -76,7 +76,7 @@ namespace LemonadeFoSale
             Console.WriteLine("Lemons: " + player.playerStock.Lemons.Count);
             Console.WriteLine("Cups of Sugar: " + player.playerStock.cupsOfSugar.Count);
             Console.WriteLine("Paper Cups: " + player.playerStock.numberOfCups.Count);
-            Console.WriteLine("\nAvailable Funds: " + "$" + player.availableFunds);
+            Console.WriteLine("\nAvailable Funds: {0:C2}" , player.availableFunds);
 
 
         }

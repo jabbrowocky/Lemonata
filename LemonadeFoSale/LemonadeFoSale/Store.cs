@@ -36,9 +36,8 @@ namespace LemonadeFoSale
             switch (userInput)
             {
                 case "l":
-                    Console.WriteLine("Purchase how many lemons? enter a number.");
                     
-                    int userSelection = int.Parse(Console.ReadLine());
+                    int userSelection = UI.GetUserIntegerInRange("Purchase how many lemons? enter a number.", 0 , 100 );
                     PurchaseItems(userSelection, PurchaseLemons, player);
                     break;
                 case "s":
@@ -64,7 +63,7 @@ namespace LemonadeFoSale
         {
             Lemon lemon = new Lemon();
             player.playerStock.Lemons.Add(lemon);
-            player.availableFunds -= lemon.UnitPrice;
+            player.availableFunds = Math.Round((player.availableFunds - lemon.UnitPrice),2);
         }
         public void PurchaseSugar(Player player)
         {
