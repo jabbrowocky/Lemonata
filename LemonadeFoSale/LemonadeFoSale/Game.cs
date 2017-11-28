@@ -10,7 +10,7 @@ namespace LemonadeFoSale
     {
         //member variables
         public Weather TodaysWeather;
-        int dayNumber = 0;
+        int dayNumber = 1;
         public int NumberOfDays;
         Player playerOne;
         
@@ -33,9 +33,9 @@ namespace LemonadeFoSale
             Console.WriteLine(" Let's simulate a lemonade stand {0}!\n", name);
             TodaysWeather = new Weather();
             DisplayPlayerInventory(playerOne);
-            Console.WriteLine("Press Enter to access store.");
-            Console.ReadLine();
-            RunStore(new Store());
+            OptionsNavigation(DisplayOptions());
+            
+            
             
             
         }
@@ -44,8 +44,8 @@ namespace LemonadeFoSale
         {
             Console.Clear();
             store.DisplayStore(playerOne);
-            DisplayPlayerInventory(playerOne);
-            Console.ReadLine();
+            OptionsNavigation(DisplayOptions());
+
         }
         
         
@@ -77,10 +77,43 @@ namespace LemonadeFoSale
             Console.WriteLine("Cups of Sugar: " + player.playerStock.cupsOfSugar.Count);
             Console.WriteLine("Paper Cups: " + player.playerStock.numberOfCups.Count);
             Console.WriteLine("\nAvailable Funds: {0:C2}" , player.availableFunds);
+            OptionsNavigation(DisplayOptions());
 
+        }
+        public void MainScreenDisplay()
+        {
+            Console.Clear();
+            Console.WriteLine("Day: " + dayNumber);
+            Console.WriteLine(TodaysWeather.TodaysWeatherType);
+            Console.WriteLine(TodaysWeather.TodaysTemp);
+            DisplayPlayerInventory(playerOne);
+            OptionsNavigation(DisplayOptions());
 
         }
         
-        
+        public string DisplayOptions()
+        {
+            string userInput = UI.ValidateInput("Press 'm' to return to the Main Screen. 's' to Access the Store Menu. 'p' to view player inventory", new List<string>() { "m","s","p"});
+            
+            return userInput;
+        }
+        public void OptionsNavigation(string userInput)
+        {
+            switch (userInput)
+            {
+                case "m":
+                    MainScreenDisplay();
+                    break;
+                case "s":
+                    RunStore(new Store());
+                    break;
+                case "p":
+                    DisplayPlayerInventory(playerOne);
+                    break;
+                default:
+                    break;
+
+            }
+        }
     }
 }

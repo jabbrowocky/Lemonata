@@ -37,14 +37,17 @@ namespace LemonadeFoSale
             {
                 case "l":
                     
-                    int userSelection = UI.GetUserIntegerInRange("Purchase how many lemons? enter a number.", 0 , 100 );
-                    PurchaseItems(userSelection, PurchaseLemons, player);
+                    int userSelectionLemons = UI.GetUserIntegerInRange("Purchase how many lemons? enter a number.", 0 , 100 );
+                    PurchaseItems(userSelectionLemons, PurchaseLemons, player);
                     break;
                 case "s":
-                    Console.WriteLine("Purchase how many cups of sugar?");
+                    
+                    int userSelectionSugar = UI.GetUserIntegerInRange("Purchase how many cups of sugar? enter a number.", 0, 1000);
+                    PurchaseItems(userSelectionSugar, PurchaseSugar, player);
                     break;
                 case "p":
-                    Console.WriteLine("Purchase how many paper cups?");
+                    int userSelectionCups = UI.GetUserIntegerInRange("Purchase how many lemons? enter a number.", 0, 500);
+                    PurchaseItems(userSelectionCups, PurchaseCups, player);
                     break;
                 default:
                     Console.Clear();
