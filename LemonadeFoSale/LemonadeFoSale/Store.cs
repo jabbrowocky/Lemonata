@@ -55,7 +55,7 @@ namespace LemonadeFoSale
         }
         public void PurchaseItems(int UserInput, Action<Player> callback, Player player)
         {
-            for (int i = 0; i <= UserInput; i++)
+            for (int i = 0; i < UserInput; i++)
             {
                 callback(player);
             }
