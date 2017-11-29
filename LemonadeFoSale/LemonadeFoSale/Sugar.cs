@@ -8,7 +8,7 @@ namespace LemonadeFoSale
 {
     public class Sugar
     {
-        public double unitPrice = .10;
+        public double unitPrice = .20;
         public Sugar()
         {
 

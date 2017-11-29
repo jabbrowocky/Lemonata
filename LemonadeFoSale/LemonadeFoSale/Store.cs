@@ -26,10 +26,19 @@ namespace LemonadeFoSale
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Store Menu\n*************");
             Console.ResetColor();
-            Console.WriteLine("\n Purchase lemons: Press 'l'");
-            Console.WriteLine("\n Purchase cups of sugar: Press 's'");
-            Console.WriteLine("\n Purchase paper cups Press 'p'");
-            Console.WriteLine("-----------------------------------");
+            Console.Write("\n Purchase lemons: $0.25 per/lemon");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" Press 'l'");
+            Console.ResetColor();
+            Console.Write("\n Purchase cups of sugar: $0.20 per/cup of sugar");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" Press 's'");
+            Console.ResetColor();
+            Console.Write("\n Purchase paper cups: $0.15 per/paper cup");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" Press 'p'");
+            Console.ResetColor();
+            Console.WriteLine("\n-----------------------------------\n   Current Inventory\n");
             Console.WriteLine(" {0} Lemons", player.playerStock.Lemons.Count);
             Console.WriteLine(" {0} Cups of Sugar", player.playerStock.cupsOfSugar.Count);
             Console.WriteLine(" {0} Paper Cups", player.playerStock.numberOfCups.Count);
@@ -80,7 +89,7 @@ namespace LemonadeFoSale
             }
             else
             {
-                PurchaseItems(userInput, PurchaseSugar, player);
+                PurchaseItems(userInput, PurchaseCups, player);
             }
             
         }
@@ -89,20 +98,32 @@ namespace LemonadeFoSale
             Console.Clear();
             switch (userInput)
             {
-                case "l":                    
-                    int userSelectionLemons = UI.GetUserIntegerInRange("Purchase how many lemons? enter a number.", 0 , 100 );
-                    CheckMaximumLemonPurchase(userSelectionLemons, player);
-                    
+                case "l":
+                    Console.WriteLine("Current Inventory\n-----------------------------------\n");
+                    Console.WriteLine(" {0} Lemons", player.playerStock.Lemons.Count);
+                    Console.WriteLine(" {0} Cups of Sugar", player.playerStock.cupsOfSugar.Count);
+                    Console.WriteLine(" {0} Paper Cups", player.playerStock.numberOfCups.Count);
+                    Console.WriteLine(" Available Income: {0:C2}\n", Math.Round(player.availableFunds, 2));
+                    int userSelectionLemons = UI.GetUserIntegerInRange("Purchase how many lemons? enter a number.", 0 , 100 );                    
+                    CheckMaximumLemonPurchase(userSelectionLemons, player);                    
                     break;
-                case "s":                    
-                    int userSelectionSugar = UI.GetUserIntegerInRange("Purchase how many cups of sugar? enter a number.", 0, 1000);
-                    CheckMaximumSugarPurchase(userSelectionSugar, player);
-                    
+                case "s":
+                    Console.WriteLine("Current Inventory\n-----------------------------------\n");
+                    Console.WriteLine(" {0} Lemons", player.playerStock.Lemons.Count);
+                    Console.WriteLine(" {0} Cups of Sugar", player.playerStock.cupsOfSugar.Count);
+                    Console.WriteLine(" {0} Paper Cups", player.playerStock.numberOfCups.Count);
+                    Console.WriteLine(" Available Income: {0:C2}\n", Math.Round(player.availableFunds, 2));
+                    int userSelectionSugar = UI.GetUserIntegerInRange("Purchase how many cups of sugar? enter a number.", 0, 1000);                    
+                    CheckMaximumSugarPurchase(userSelectionSugar, player);                    
                     break;
                 case "p":
-                    int userSelectionCups = UI.GetUserIntegerInRange("Purchase how many paper cups? enter a number.", 0, 500);
-                    CheckMaximumCupPurchase(userSelectionCups, player);
-                    
+                    Console.WriteLine("Current Inventory\n-----------------------------------\n");
+                    Console.WriteLine(" {0} Lemons", player.playerStock.Lemons.Count);
+                    Console.WriteLine(" {0} Cups of Sugar", player.playerStock.cupsOfSugar.Count);
+                    Console.WriteLine(" {0} Paper Cups", player.playerStock.numberOfCups.Count);
+                    Console.WriteLine(" Available Income: {0:C2}\n", Math.Round(player.availableFunds, 2));
+                    int userSelectionCups = UI.GetUserIntegerInRange("Purchase how many paper cups? enter a number.", 0, 500);                    
+                    CheckMaximumCupPurchase(userSelectionCups, player);                    
                     break;
                 default:
                     Console.Clear();

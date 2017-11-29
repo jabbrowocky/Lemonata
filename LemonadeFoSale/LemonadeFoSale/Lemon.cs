@@ -8,7 +8,7 @@ namespace LemonadeFoSale
 {
     public class Lemon
     {
-        public double UnitPrice = 0.15;
+        public double UnitPrice = 0.25;
         public int LemonAge;
 
         public Lemon()

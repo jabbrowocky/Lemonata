@@ -20,7 +20,7 @@ namespace LemonadeFoSale
         //constructor
         public Game()
         {
-            playerOne = new Player(20.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cup>()));
+            playerOne = new Player(25.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cup>()));
             UI.DisplayTitleLoop(this);                   
             
         }
