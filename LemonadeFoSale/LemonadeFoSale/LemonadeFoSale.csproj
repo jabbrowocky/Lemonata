@@ -46,6 +46,7 @@
     <Compile Include="Cup.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="IceCube.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Lemon.cs" />
     <Compile Include="musicplayer.cs" />

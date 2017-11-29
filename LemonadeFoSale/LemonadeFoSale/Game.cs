@@ -20,7 +20,7 @@ namespace LemonadeFoSale
         //constructor
         public Game()
         {
-            playerOne = new Player(25.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cup>()));
+            playerOne = new Player(25.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cup>(), new List<IceCube>()));
             UI.DisplayTitleLoop(this);                   
             
         }
@@ -78,6 +78,7 @@ namespace LemonadeFoSale
             Console.WriteLine("Lemons: " + player.playerStock.Lemons.Count);
             Console.WriteLine("Cups of Sugar: " + player.playerStock.cupsOfSugar.Count);
             Console.WriteLine("Paper Cups: " + player.playerStock.numberOfCups.Count);
+            Console.WriteLine("Ice Cubes: " + player.playerStock.numberOfCubes.Count);
             Console.WriteLine("\nAvailable Funds: {0:C2}" , Math.Round(player.availableFunds,2));
             
 
