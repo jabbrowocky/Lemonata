@@ -20,7 +20,7 @@ namespace LemonadeFoSale
         //constructor
         public Game()
         {
-            playerOne = new Player(35.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cup>()));
+            playerOne = new Player(20.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cup>()));
             UI.DisplayTitleLoop(this);                   
             
         }
@@ -33,19 +33,19 @@ namespace LemonadeFoSale
             Console.WriteLine(" Let's simulate a lemonade stand {0}!\n", name);
             TodaysWeather = new Weather();
             DisplayPlayerInventory(playerOne);
-            OptionsNavigation(DisplayOptions());
-            
-            
-            
-            
+            OptionsNavigation(DisplayOptions("To access store, press 's'.", new List<string> { "s" }));
+
+
+
+
         }
         
         public void RunStore(Store store)
         {
-            Console.Clear();
+            Console.Clear();            
+            Console.Write("\n");
             store.DisplayStore(playerOne);
-            OptionsNavigation(DisplayOptions());
-
+            OptionsNavigation(DisplayOptions("To return to store, press 's' and to return to main screen press 'm'.", new List<string> { "m","s" }));
         }
         
         
@@ -70,31 +70,38 @@ namespace LemonadeFoSale
 
         public void DisplayPlayerInventory(Player player)
         {
-            Console.Clear();
+            
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\n{0}'s Current Stock\n*****************************\n", player.playerName);
             Console.ResetColor();
             Console.WriteLine("Lemons: " + player.playerStock.Lemons.Count);
             Console.WriteLine("Cups of Sugar: " + player.playerStock.cupsOfSugar.Count);
             Console.WriteLine("Paper Cups: " + player.playerStock.numberOfCups.Count);
-            Console.WriteLine("\nAvailable Funds: {0:C2}" , player.availableFunds);
-            OptionsNavigation(DisplayOptions());
+            Console.WriteLine("\nAvailable Funds: {0:C2}" , Math.Round(player.availableFunds,2));
+            
 
         }
         public void MainScreenDisplay()
         {
             Console.Clear();
-            Console.WriteLine("Day: " + dayNumber);
-            Console.WriteLine(TodaysWeather.TodaysWeatherType);
-            Console.WriteLine(TodaysWeather.TodaysTemp);
+            DisplayDayInformation();
             DisplayPlayerInventory(playerOne);
-            OptionsNavigation(DisplayOptions());
+            OptionsNavigation(DisplayOptions("To access store, press 's'.", new List<string> { "s" }));
 
         }
-        
-        public string DisplayOptions()
+        public void DisplayDayInformation()
         {
-            string userInput = UI.ValidateInput("Press 'm' to return to the Main Screen. 's' to Access the Store Menu. 'p' to view player inventory", new List<string>() { "m","s","p"});
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Day to Day information:\n****************************");
+            Console.ResetColor();
+            Console.WriteLine("Day number: " + dayNumber);
+            Console.WriteLine("Today's weather : {0}", TodaysWeather.TodaysWeatherType);
+            Console.WriteLine("Today's temperature: {0}°", TodaysWeather.TodaysTemp);
+        }
+        
+        public string DisplayOptions(string instructions, List<string>validInputs)
+        {
+            string userInput = UI.ValidateInput(instructions, validInputs);
             
             return userInput;
         }
@@ -103,14 +110,13 @@ namespace LemonadeFoSale
             switch (userInput)
             {
                 case "m":
+                    Console.Clear();
                     MainScreenDisplay();
                     break;
                 case "s":
+                    Console.Clear();
                     RunStore(new Store());
-                    break;
-                case "p":
-                    DisplayPlayerInventory(playerOne);
-                    break;
+                    break;                
                 default:
                     break;
 
