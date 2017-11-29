@@ -13,7 +13,7 @@ namespace LemonadeFoSale
         public Inventory playerStock;
         public double availableFunds;
         public Recipe playerRecipe;
-
+        
         //constructor
         public Player(double availableFunds, Inventory playerStock)
         {

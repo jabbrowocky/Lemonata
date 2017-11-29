@@ -65,6 +65,7 @@ namespace LemonadeFoSale
         }
         public void SetLemonadeRecipe()
         {
+           
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\n{0}'s Current Stock\n*****************************\n", playerOne.playerName);
             Console.ResetColor();
@@ -73,21 +74,44 @@ namespace LemonadeFoSale
             Console.WriteLine("Paper Cups: " + playerOne.playerStock.numberOfCups.Count);
             Console.WriteLine("Ice Cubes: " + playerOne.playerStock.numberOfCubes.Count);
             Console.WriteLine("\n Let's craft your lemonade recipe");
-            OptionsNavigation(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes, and 'c' to select the number of cups.", new List<string>{ "l","s","i","c"}));
+            GetRecipeLogic(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes, 'c' to select the number of cups 'f' to finalize recipe.", new List<string> { "l", "s", "i", "c","f" }), playerOne.playerRecipe);
+
             
         }
-        public void GetRecipeLogic(Recipe recipe)
+        public void GetRecipeLogic(string userInput, Recipe recipe)
         {
+            switch (userInput)
+            {
+                case "l":
+                    SetLemons();
+                    break;
+                case "s":
+                    break;
+                case "i":
+                    break;
+                case "c":
+                    break;
+                case "f":
+                    break;
+                default:
+                    break;
 
+            }
 
         }
         public void SetLemons()
         {
+            playerOne.playerRecipe.lemonsPerPitcher = UI.GetUserIntegerInRange("Please select how many lemons you wish to use per pitcher", 0, playerOne.playerStock.Lemons.Count);
+            playerOne.playerRecipe.AddLemons(playerOne);
+
+        }
+        public void SetSugar()
+        {
 
         }
 
 
-        public void DisplayPlayerInventory(Player player)
+    public void DisplayPlayerInventory(Player player)
         {
             
             Console.ForegroundColor = ConsoleColor.Green;
