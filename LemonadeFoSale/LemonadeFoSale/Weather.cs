@@ -48,7 +48,7 @@ namespace LemonadeFoSale
             List<string> ForcastTypes = new List<string>() { "Sunny", "Rainy", "Overcast", "Foggy" };
             ForcastTypes.Add(TodaysWeatherType);
             ForcastTypes.Add(TodaysWeatherType);
-            TomorrowsWeatherTypeForcast = ForcastTypes[Weatherselector.Next(5)];
+            TomorrowsWeatherTypeForcast = ForcastTypes[Weatherselector.Next(6)];
             return TomorrowsWeatherTypeForcast;
         }
 

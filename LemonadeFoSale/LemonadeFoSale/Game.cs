@@ -16,7 +16,6 @@ namespace LemonadeFoSale
         
 
 
-
         //constructor
         public Game()
         {
@@ -27,7 +26,7 @@ namespace LemonadeFoSale
 
         //member methods
 
-        public void RunGame(int Days, string name)
+        public void RunGame(int days, string name)
         {
           
             TodaysWeather = new Weather();
@@ -80,6 +79,11 @@ namespace LemonadeFoSale
         public void GetRecipeLogic(Recipe recipe)
         {
 
+
+        }
+        public void SetLemons()
+        {
+
         }
 
 
@@ -116,6 +120,7 @@ namespace LemonadeFoSale
             }
 
         }
+        
         public void DisplayDayInformation()
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -152,7 +157,7 @@ namespace LemonadeFoSale
                     break;
                 case "r":
                     Console.Clear();
-                    SetLemonadeRecipe(new Recipe());
+                    SetLemonadeRecipe();
                     break;
                 case "d":
                     RunDay();

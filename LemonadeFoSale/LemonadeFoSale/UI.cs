@@ -51,7 +51,7 @@ namespace LemonadeFoSale
             }
 
 
-            System.Threading.Thread.Sleep(750);
+            System.Threading.Thread.Sleep(550);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\n                 Press Any Key To Continue\n");
             Console.ResetColor();
@@ -95,17 +95,17 @@ namespace LemonadeFoSale
                 
                 case ("r"):
                     DisplayRules(game);
-                break;                
+                    break;                
                 case ("s"):
                     Console.Clear();
                     game.RunGame(game.SetNumberOfDays(), game.GetPlayerName());
-                break;
+                    break;
                 case ("q"):
                     break;
                 default:
                     Console.WriteLine("That is not a valid input.");
-                DisplayMainMenu(game);
-                break;
+                    DisplayMainMenu(game);
+                    break;
 
             }
         }
