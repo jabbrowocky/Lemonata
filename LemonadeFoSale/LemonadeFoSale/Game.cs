@@ -29,15 +29,11 @@ namespace LemonadeFoSale
 
         public void RunGame(int Days, string name)
         {
-            Console.Clear();
-            Console.WriteLine(" Let's simulate a lemonade stand {0}!\n", name);
+          
             TodaysWeather = new Weather();
+            MainScreenDisplay();
             
-            DisplayPlayerInventory(playerOne);
-            OptionsNavigation(DisplayOptions("To access store, press 's'.", new List<string> { "s" }));
-
-
-
+           
 
         }
         
@@ -68,6 +64,18 @@ namespace LemonadeFoSale
 
            
         }
+        public void SetLemonadeRecipe(Recipe recipe)
+        {
+            DisplayPlayerInventory(playerOne);
+            Console.WriteLine("Let's craft your lemonade recipe");
+            OptionsNavigation(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes, and 'c' to select the number of cups.", new List<string>{ "l","s","i","c"}));
+            
+        }
+        public void GetRecipeLogic(Recipe recipe)
+        {
+
+        }
+
 
         public void DisplayPlayerInventory(Player player)
         {
@@ -81,14 +89,25 @@ namespace LemonadeFoSale
             Console.WriteLine("Ice Cubes: " + player.playerStock.numberOfCubes.Count);
             Console.WriteLine("\nAvailable Funds: {0:C2}" , Math.Round(player.availableFunds,2));
             
-
+            
         }
         public void MainScreenDisplay()
         {
             Console.Clear();
             DisplayDayInformation();
             DisplayPlayerInventory(playerOne);
-            OptionsNavigation(DisplayOptions("To access store, press 's'.", new List<string> { "s" }));
+            if (playerOne.playerStock.cupsOfSugar.Count == 0 || playerOne.playerStock.numberOfCubes.Count == 0 || playerOne.playerStock.numberOfCups.Count == 0 ||playerOne.playerStock.Lemons.Count == 0)
+            {
+                OptionsNavigation(DisplayOptions("To access store, press 's'.", new List<string> { "s" }));
+            }
+            else if (playerOne.playerRecipe.numberOfCupsCreated == 0)
+            {
+                OptionsNavigation(DisplayOptions("To access store, press 's' or press 'r' to set your recipe.", new List<string> { "s", "r" }));
+            }
+            else
+            {
+                OptionsNavigation(DisplayOptions("To access store press 's' or press 'r' to set your recipe, or press 'd' to run the day.", new List<string> { "s", "r" }));
+            }
 
         }
         public void DisplayDayInformation()
@@ -101,6 +120,7 @@ namespace LemonadeFoSale
             Console.WriteLine("Today's temperature: {0}°", TodaysWeather.TodaysTemp);
             TodaysWeather.DisplayTomorrowsForcast();
         }
+        
         
         public string DisplayOptions(string instructions, List<string>validInputs)
         {
@@ -119,7 +139,13 @@ namespace LemonadeFoSale
                 case "s":
                     Console.Clear();
                     RunStore(new Store());
-                    break;                
+                    break;
+                case "r":
+                    Console.Clear();
+                    SetLemonadeRecipe(new Recipe());
+                    break;
+                case "d":
+                    break;               
                 default:
                     break;
 
