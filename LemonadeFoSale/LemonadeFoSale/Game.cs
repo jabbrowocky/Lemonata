@@ -32,6 +32,7 @@ namespace LemonadeFoSale
             Console.Clear();
             Console.WriteLine(" Let's simulate a lemonade stand {0}!\n", name);
             TodaysWeather = new Weather();
+            
             DisplayPlayerInventory(playerOne);
             OptionsNavigation(DisplayOptions("To access store, press 's'.", new List<string> { "s" }));
 
@@ -97,6 +98,7 @@ namespace LemonadeFoSale
             Console.WriteLine("Day number: " + dayNumber);
             Console.WriteLine("Today's weather : {0}", TodaysWeather.TodaysWeatherType);
             Console.WriteLine("Today's temperature: {0}°", TodaysWeather.TodaysTemp);
+            TodaysWeather.DisplayTomorrowsForcast();
         }
         
         public string DisplayOptions(string instructions, List<string>validInputs)
