@@ -64,10 +64,16 @@ namespace LemonadeFoSale
 
            
         }
-        public void SetLemonadeRecipe(Recipe recipe)
+        public void SetLemonadeRecipe()
         {
-            DisplayPlayerInventory(playerOne);
-            Console.WriteLine("Let's craft your lemonade recipe");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n{0}'s Current Stock\n*****************************\n", playerOne.playerName);
+            Console.ResetColor();
+            Console.WriteLine("Lemons: " + playerOne.playerStock.Lemons.Count);
+            Console.WriteLine("Cups of Sugar: " + playerOne.playerStock.cupsOfSugar.Count);
+            Console.WriteLine("Paper Cups: " + playerOne.playerStock.numberOfCups.Count);
+            Console.WriteLine("Ice Cubes: " + playerOne.playerStock.numberOfCubes.Count);
+            Console.WriteLine("\n Let's craft your lemonade recipe");
             OptionsNavigation(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes, and 'c' to select the number of cups.", new List<string>{ "l","s","i","c"}));
             
         }
@@ -106,7 +112,7 @@ namespace LemonadeFoSale
             }
             else
             {
-                OptionsNavigation(DisplayOptions("To access store press 's' or press 'r' to set your recipe, or press 'd' to run the day.", new List<string> { "s", "r" }));
+                OptionsNavigation(DisplayOptions("To access store press 's' or press 'r' to set your recipe, or press 'd' to run the day.", new List<string> { "s", "r", "d" }));
             }
 
         }
@@ -119,6 +125,10 @@ namespace LemonadeFoSale
             Console.WriteLine("Today's weather : {0}", TodaysWeather.TodaysWeatherType);
             Console.WriteLine("Today's temperature: {0}°", TodaysWeather.TodaysTemp);
             TodaysWeather.DisplayTomorrowsForcast();
+        }
+        public void RunDay()
+        {
+
         }
         
         
@@ -145,6 +155,7 @@ namespace LemonadeFoSale
                     SetLemonadeRecipe(new Recipe());
                     break;
                 case "d":
+                    RunDay();
                     break;               
                 default:
                     break;
