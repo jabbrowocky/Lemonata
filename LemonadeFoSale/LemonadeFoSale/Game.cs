@@ -132,9 +132,11 @@ namespace LemonadeFoSale
                 playerOne.playerRecipe.DisplayPreviousRecipe();
             }
             DisplayRecipe();
-            Console.WriteLine("\n Let's craft your lemonade recipe\n Note: makes 1 pitcher, which in turn makes up to 20 cups (or as many cups as you have available if < 20))\n");            
-            GetRecipeLogic(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes, 'm' to return to main menu, or 'f' to finalize recipe.", new List<string> { "l", "s", "i","m","f" }), playerOne.playerRecipe);
-
+            Console.WriteLine("\n Let's craft your lemonade recipe\n Note: makes 1 pitcher, which in turn makes up to 20 cups (or as many cups as you have available if < 20))\n");
+            Console.WriteLine(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes, 'm' to return to main menu, or 'f' to finalize recipe.");
+            string userInput = Console.ReadLine();
+            GetRecipeLogic(userInput, playerOne.playerRecipe);       
+            
             
         }
         public void DisplayRecipe()
@@ -182,6 +184,10 @@ namespace LemonadeFoSale
                     SetLemonadeRecipe();
                     break;
                 default:
+                    Console.WriteLine("That is not a valid input, please enter one of the options. Press any key to continue");
+                    Console.ReadKey();
+                    Console.Clear();
+                    SetLemonadeRecipe();
                     break;
 
             }
@@ -203,10 +209,7 @@ namespace LemonadeFoSale
             playerOne.playerRecipe.cubesPerPitcher = userSelection;
             playerOne.playerRecipe.AddIceCubes(playerOne);
         }
-        public void FinalizeRecipe()
-        {
-
-        }
+        
 
         public void DisplayPlayerInventory(Player player)
         {
@@ -227,11 +230,8 @@ namespace LemonadeFoSale
             Console.Clear();
             DisplayDayInformation();
             DisplayPlayerInventory(playerOne);
-            if (playerOne.playerStock.cupsOfSugar.Count == 0 || playerOne.playerStock.numberOfCubes.Count == 0 || playerOne.playerStock.numberOfCups.Count == 0 ||playerOne.playerStock.Lemons.Count == 0)
-            {
-                OptionsNavigation(DisplayOptions("\nTo access store, press 's'.", new List<string> { "s" }));
-            }
-            else if (playerOne.playerRecipe.numberOfPitchers == 0)
+           
+            if (playerOne.playerRecipe.numberOfPitchers == 0)
             {
                 OptionsNavigation(DisplayOptions("\nTo access store, press 's' or press 'r' to set your recipe.", new List<string> { "s", "r" }));
             }
