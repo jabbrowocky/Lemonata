@@ -41,7 +41,7 @@ namespace LemonadeFoSale
             Console.Clear();            
             Console.Write("\n");
             store.DisplayStore(playerOne);
-            OptionsNavigation(DisplayOptions("To return to store, press 's' and to return to main screen press 'm'.", new List<string> { "m","s" }));
+            OptionsNavigation(DisplayOptions("\nTo return to store, press 's' and to return to main screen press 'm'.", new List<string> { "m","s" }));
         }
         
         
@@ -74,15 +74,16 @@ namespace LemonadeFoSale
             Console.WriteLine(" Ice Cubes: " + playerOne.playerStock.numberOfCubes.Count);
             Console.WriteLine(" Paper Cups: " + playerOne.playerStock.numberOfCups.Count + "\n");
             DisplayRecipe();
-            Console.WriteLine("\n Let's craft your lemonade recipe\n Note: makes 1 pitcher, which in turn makes up to 20 cups (or as many cups as you have available if < 20))");            
+            Console.WriteLine("\n Let's craft your lemonade recipe\n Note: makes 1 pitcher, which in turn makes up to 20 cups (or as many cups as you have available if < 20))\n");            
             GetRecipeLogic(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes or 'f' to finalize recipe.", new List<string> { "l", "s", "i","f" }), playerOne.playerRecipe);
 
             
         }
         public void DisplayRecipe()
         {
-            Lemon lemon = new Lemon();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(" Current Recipe Contains:\n***********************\n");
+            Console.ResetColor();
             Console.WriteLine(" Lemons: " + playerOne.playerRecipe.lemonsPerPitcher);
             Console.WriteLine(" Sugar: " + playerOne.playerRecipe.sugarPerPitcher);
             Console.WriteLine(" Ice Cubes: " + playerOne.playerRecipe.cubesPerPitcher);
@@ -162,15 +163,15 @@ namespace LemonadeFoSale
             DisplayPlayerInventory(playerOne);
             if (playerOne.playerStock.cupsOfSugar.Count == 0 || playerOne.playerStock.numberOfCubes.Count == 0 || playerOne.playerStock.numberOfCups.Count == 0 ||playerOne.playerStock.Lemons.Count == 0)
             {
-                OptionsNavigation(DisplayOptions("To access store, press 's'.", new List<string> { "s" }));
+                OptionsNavigation(DisplayOptions("\nTo access store, press 's'.", new List<string> { "s" }));
             }
             else if (playerOne.playerRecipe.numberOfCupsCreated == 0)
             {
-                OptionsNavigation(DisplayOptions("To access store, press 's' or press 'r' to set your recipe.", new List<string> { "s", "r" }));
+                OptionsNavigation(DisplayOptions("\nTo access store, press 's' or press 'r' to set your recipe.", new List<string> { "s", "r" }));
             }
             else
             {
-                OptionsNavigation(DisplayOptions("To access store press 's' or press 'r' to set your recipe, or press 'd' to run the day.", new List<string> { "s", "r", "d" }));
+                OptionsNavigation(DisplayOptions("\nTo access store press 's' or press 'r' to set your recipe, or press 'd' to run the day.", new List<string> { "s", "r", "d" }));
             }
 
         }
@@ -178,7 +179,7 @@ namespace LemonadeFoSale
         public void DisplayDayInformation()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Day to Day information:\n****************************");
+            Console.WriteLine("Day to Day information:\n****************************\n");
             Console.ResetColor();
             Console.WriteLine("Day number: " + dayNumber);
             Console.WriteLine("Today's weather : {0}", TodaysWeather.TodaysWeatherType);

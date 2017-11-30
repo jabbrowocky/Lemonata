@@ -22,9 +22,18 @@ namespace LemonadeFoSale
 
         public void DisplayStore(Player player)
         {
-            
+
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Store Menu\n*************");
+            Console.WriteLine(" Current Inventory\n*******************");
+            Console.ResetColor();
+            Console.WriteLine(" {0} Lemons", player.playerStock.Lemons.Count);
+            Console.WriteLine(" {0} Cups of Sugar", player.playerStock.cupsOfSugar.Count);
+            Console.WriteLine(" {0} Paper Cups", player.playerStock.numberOfCups.Count);
+            Console.WriteLine(" {0} Ice Cubes", player.playerStock.numberOfCubes.Count);
+            Console.WriteLine(" Available Income: {0:C2}", Math.Round(player.availableFunds, 2));
+            Console.WriteLine("\n-----------------------------------\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" Store Menu\n*************");
             Console.ResetColor();
             Console.Write("\n Purchase lemons: $0.25 per/lemon");
             Console.ForegroundColor = ConsoleColor.Red;
@@ -42,14 +51,7 @@ namespace LemonadeFoSale
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(" Press 'c'");
             Console.ResetColor();
-            Console.WriteLine("\nYou can also press 'm' for more options.");
-            Console.WriteLine("\n-----------------------------------\n   Current Inventory\n");
-            Console.WriteLine(" {0} Lemons", player.playerStock.Lemons.Count);
-            Console.WriteLine(" {0} Cups of Sugar", player.playerStock.cupsOfSugar.Count);
-            Console.WriteLine(" {0} Paper Cups", player.playerStock.numberOfCups.Count);
-            Console.WriteLine(" {0} Ice Cubes", player.playerStock.numberOfCubes.Count);
-            Console.WriteLine(" Available Income: {0:C2}", Math.Round(player.availableFunds,2));
-            
+            Console.WriteLine("\n\n You can also press 'm' for more options.");            
             string userInput = Console.ReadLine();
             GetStoreLogic(userInput, player);
             
