@@ -170,7 +170,7 @@ namespace LemonadeFoSale
                     SetLemonadeRecipe();
                     break;
                 case "i":
-                    SetIceCubes(UI.GetUserIntegerInRange("Please select how many ice cubes do you wish to use per pitcher", 0, playerOne.playerStock.numberOfCubes.Count));
+                    SetIceCubes(UI.GetUserIntegerInRange("Please select how many ice cubes you wish to use per pitcher", 0, playerOne.playerStock.numberOfCubes.Count));
                     Console.Clear();
                     SetLemonadeRecipe();
                     break;
@@ -221,6 +221,10 @@ namespace LemonadeFoSale
             Console.WriteLine("Cups of Sugar: " + player.playerStock.cupsOfSugar.Count);
             Console.WriteLine("Paper Cups: " + player.playerStock.numberOfCups.Count);
             Console.WriteLine("Ice Cubes: " + player.playerStock.numberOfCubes.Count);
+            if (playerOne.playerRecipe.numberOfPitchers >= 1)
+            {
+                Console.WriteLine(" " + playerOne.playerRecipe.numberOfPitchers);
+            }
             Console.WriteLine("\nAvailable Funds: {0:C2}" , Math.Round(player.availableFunds,2));
             
             
@@ -237,7 +241,7 @@ namespace LemonadeFoSale
             }
             else
             {
-                OptionsNavigation(DisplayOptions("\nTo access store press 's' or press 'r' to set your recipe, or press 'd' to run the day.", new List<string> { "s", "r", "d" }));
+                OptionsNavigation(DisplayOptions("\nTo access store press 's' or press 'r' to set your recipe, or press 'd' to begin the day.", new List<string> { "s", "r", "d" }));
             }
 
         }
