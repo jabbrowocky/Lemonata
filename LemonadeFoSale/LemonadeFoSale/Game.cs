@@ -49,6 +49,13 @@ namespace LemonadeFoSale
         {
             Console.WriteLine("\n Please enter player name: \n");
             playerOne.playerName = Console.ReadLine();
+            if (playerOne.playerName == "Donald Trump")
+            {
+                Console.Clear();
+                Console.WriteLine("You've got a very good brain, your lemonade stand is bound to succeed\ngiven your massive understanding of business acumen, you win, so much winning.");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
             return playerOne.playerName;
             
         }
