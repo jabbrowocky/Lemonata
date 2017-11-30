@@ -20,7 +20,7 @@ namespace LemonadeFoSale
         //constructor
         public Game()
         {
-            playerOne = new Player(25.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cup>(), new List<IceCube>()));
+            playerOne = new Player(25.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cups>(), new List<IceCube>()));
             UI.DisplayTitleLoop(this);                   
             
         }
@@ -33,9 +33,8 @@ namespace LemonadeFoSale
             TodaysWeather = new Weather();
             for (int i = 1; i <= NumberOfDays; i ++)
             {
-                MainScreenDisplay();
-                RunDay();
-
+                MainScreenDisplay();                
+                NumberOfDays--;
             }
             
             
@@ -73,13 +72,41 @@ namespace LemonadeFoSale
         }
         public void RunDay()
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" Beginning of Day " + this.dayNumber + "\n*****************************\n");
+            Console.ResetColor();
+            int pitcherInput = UI.GetUserIntegerInRange("How many pitchers would you like use? You have " + playerOne.playerRecipe.numberOfPitchers + " available", 1, playerOne.playerRecipe.numberOfPitchers);
+            double userPrice = UI.GetUserDoubleInRange("At what price would you like to sell your cups of lemonade?", 0, 5);
+            ConsumePitcher(pitcherInput, userPrice);
+            Console.WriteLine("You have {0} cups available for purchase at {1} per cup", playerOne.playerRecipe.CupsToSell.Count, playerOne.playerRecipe.sellCup.standPrice);
+            Console.ReadKey();        
 
+           
             PopulatePassersby(CreateCustomers());
             for ( int i = 0; i < passersBy.Count; i++)
             {
 
             }
 
+        }
+        
+        public void ConsumePitcher(int userInput, double sellPrice)
+        {
+            if (userInput > 1 && playerOne.playerStock.numberOfCups.Count < 21)
+            {
+                playerOne.playerRecipe.AddCups(playerOne, sellPrice);
+                Console.WriteLine("You only had enough cups to use 1 pitcher you have {0} left", playerOne.playerRecipe.numberOfPitchers);
+                return;
+            }
+            for (int i = 0; i < userInput; i ++)
+            {
+                
+                playerOne.playerRecipe.AddCups(playerOne, sellPrice);
+               
+
+            }   
+           
         }
 
 
@@ -223,7 +250,7 @@ namespace LemonadeFoSale
             Console.WriteLine("Ice Cubes: " + player.playerStock.numberOfCubes.Count);
             if (playerOne.playerRecipe.numberOfPitchers >= 1)
             {
-                Console.WriteLine(" " + playerOne.playerRecipe.numberOfPitchers);
+                Console.WriteLine("Number of available pitchers: " + playerOne.playerRecipe.numberOfPitchers);
             }
             Console.WriteLine("\nAvailable Funds: {0:C2}" , Math.Round(player.availableFunds,2));
             

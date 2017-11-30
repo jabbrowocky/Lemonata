@@ -11,11 +11,11 @@ namespace LemonadeFoSale
         //member variables
         public List<Lemon> Lemons;
         public List<Sugar> cupsOfSugar;
-        public List<Cup> numberOfCups;
+        public List<Cups> numberOfCups;
         public List<IceCube> numberOfCubes;
 
         //constructor
-        public Inventory(List<Lemon>Lemons, List<Sugar>cupsOfSugar, List<Cup> numberOfCups, List<IceCube>numberOfCubes)
+        public Inventory(List<Lemon>Lemons, List<Sugar>cupsOfSugar, List<Cups> numberOfCups, List<IceCube>numberOfCubes)
         {
             this.Lemons = Lemons;
             this.cupsOfSugar = cupsOfSugar;

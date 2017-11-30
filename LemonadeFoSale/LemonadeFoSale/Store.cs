@@ -88,8 +88,8 @@ namespace LemonadeFoSale
         }
         public void CheckMaximumCupPurchase(int userInput, Player player)
         {
-            Cup cup = new Cup();
-            if (player.availableFunds < (userInput * cup.unitPrice))
+            Cups cup = new Cups();
+            if (player.availableFunds < (userInput * cup.UnitPrice))
             {
                 Console.WriteLine("You don't have enough money to purchase that amount\nPress any key to continue.");
                 Console.ReadKey();
@@ -198,9 +198,9 @@ namespace LemonadeFoSale
         }
         public void PurchaseCups(Player player)
         {
-            Cup cup = new Cup();
+            Cups cup = new Cups();
             player.playerStock.numberOfCups.Add(cup);
-            player.availableFunds = Math.Round((player.availableFunds - cup.unitPrice),2);
+            player.availableFunds = Math.Round((player.availableFunds - cup.UnitPrice),2);
         }
         public void PurchaseCubes(Player player)
         {

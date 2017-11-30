@@ -13,9 +13,11 @@ namespace LemonadeFoSale
 
         public int numberOfPitchers = 0;
         public int numberOfCupsCreated = 0;
+        public List<Cups> CupsToSell = new List<Cups>();
         public int lemonsPerPitcher;
         public int sugarPerPitcher;
         public int cubesPerPitcher;
+        public Cups sellCup = new Cups();
         public List<int> previousRecipeIngredients = new List<int>();
 
         public Recipe()
@@ -84,18 +86,31 @@ namespace LemonadeFoSale
             }
             
         }
-        public void AddCups(Player player)
+        public void PopulateSellableCups(int numberOfCupsCreated, double sellPrice)
         {
+            
+            sellCup.standPrice = sellPrice;
+            for (int i = 0; i < numberOfCupsCreated; i ++)
+            {
+                CupsToSell.Add(sellCup);
+            }
+        }
+     
+        public void AddCups(Player player, double sellPrice)
+        {
+            
             numberOfPitchers--;            
             if (player.playerStock.numberOfCups.Count < 20)
             {                
                 numberOfCupsCreated = player.playerStock.numberOfCups.Count;
                 player.playerStock.numberOfCups.Clear();
-            }
+                PopulateSellableCups(numberOfCupsCreated, sellPrice);
+            }            
             else
             {                
                 player.playerStock.numberOfCups.RemoveRange(0, 19);
                 numberOfCupsCreated = 20;
+                PopulateSellableCups(numberOfCupsCreated, sellPrice);
             }
         }
     }
