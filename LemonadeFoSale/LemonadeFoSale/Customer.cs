@@ -9,11 +9,17 @@ namespace LemonadeFoSale
     class Customer
     {
         //member variables
+        bool isSatisfied;
 
 
         //constructor
+        public Customer()
+        {
+
+        }
 
 
         //member methods
+
     }
 }

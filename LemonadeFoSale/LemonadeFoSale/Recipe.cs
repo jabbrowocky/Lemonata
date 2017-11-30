@@ -9,7 +9,7 @@ namespace LemonadeFoSale
     public class Recipe
     {
 
-        List<Object> userRecipe = new List<Object>();
+        
 
         public int numberOfPitchers = 0;
         public int numberOfCupsCreated = 0;
@@ -25,43 +25,53 @@ namespace LemonadeFoSale
 
         public void AddLemons(Player player)
         {
-            Lemon recipeLemon = new Lemon();
-            for (int i = 0; i <= lemonsPerPitcher; i ++)
+            
+            for (int i = 0; i < lemonsPerPitcher; i ++)
             {
-                userRecipe.Add(recipeLemon);
+                
                 player.playerStock.Lemons.RemoveAt(0);
             }
         }
         public void AddSugar(Player player)
         {
-            Sugar recipeSugar = new Sugar();
-            for (int i = 0; i <=sugarPerPitcher; i ++)
+            
+            for (int i = 0; i < sugarPerPitcher; i ++)
             {
-                userRecipe.Add(recipeSugar);
+                
                 player.playerStock.cupsOfSugar.RemoveAt(0);
             }
         }
         public void AddIceCubes(Player player)
         {
-            IceCube recipeIceCube = new IceCube();
-            for (int i = 0; i <=cubesPerPitcher; i++)
+            
+            for (int i = 0; i < cubesPerPitcher; i++)
             {
-                userRecipe.Add(recipeIceCube);
+                
                 player.playerStock.numberOfCubes.RemoveAt(0);
             }
         }
-        public int CreatePitcher(Player player)
+        public int CreatePitcher()
         {
-            userRecipe.Clear();
+            lemonsPerPitcher = 0;
+            cubesPerPitcher = 0;
+            sugarPerPitcher = 0;
             numberOfPitchers++;
             return numberOfPitchers;
             
         }
         public void AddCups(Player player)
         {
-            numberOfPitchers--;
-            player.playerStock.numberOfCups.RemoveRange(0,19);
-            numberOfCupsCreated = 20;
+            numberOfPitchers--;            
+            if (player.playerStock.numberOfCups.Count < 20)
+            {                
+                numberOfCupsCreated = player.playerStock.numberOfCups.Count;
+                player.playerStock.numberOfCups.Clear();
+            }
+            else
+            {                
+                player.playerStock.numberOfCups.RemoveRange(0, 19);
+                numberOfCupsCreated = 20;
+            }
         }
     }
 }

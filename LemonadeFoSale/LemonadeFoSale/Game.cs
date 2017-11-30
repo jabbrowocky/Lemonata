@@ -69,13 +69,28 @@ namespace LemonadeFoSale
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\n{0}'s Current Stock\n*****************************\n", playerOne.playerName);
             Console.ResetColor();
-            Console.WriteLine("Lemons: " + playerOne.playerStock.Lemons.Count);
-            Console.WriteLine("Cups of Sugar: " + playerOne.playerStock.cupsOfSugar.Count);
-            Console.WriteLine("Paper Cups: " + playerOne.playerStock.numberOfCups.Count);
-            Console.WriteLine("Ice Cubes: " + playerOne.playerStock.numberOfCubes.Count);
-            Console.WriteLine("\n Let's craft your lemonade recipe");
-            GetRecipeLogic(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes, 'c' to select the number of cups 'f' to finalize recipe.", new List<string> { "l", "s", "i", "c","f" }), playerOne.playerRecipe);
+            Console.WriteLine(" Lemons: " + playerOne.playerStock.Lemons.Count);
+            Console.WriteLine(" Cups of Sugar: " + playerOne.playerStock.cupsOfSugar.Count);
+            Console.WriteLine(" Ice Cubes: " + playerOne.playerStock.numberOfCubes.Count);
+            Console.WriteLine(" Paper Cups: " + playerOne.playerStock.numberOfCups.Count + "\n");
+            DisplayRecipe();
+            Console.WriteLine("\n Let's craft your lemonade recipe\n Note: makes 1 pitcher, which in turn makes up to 20 cups (or as many cups as you have available if < 20))");            
+            GetRecipeLogic(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes or 'f' to finalize recipe.", new List<string> { "l", "s", "i","f" }), playerOne.playerRecipe);
 
+            
+        }
+        public void DisplayRecipe()
+        {
+            Lemon lemon = new Lemon();
+            Console.WriteLine(" Current Recipe Contains:\n***********************\n");
+            Console.WriteLine(" Lemons: " + playerOne.playerRecipe.lemonsPerPitcher);
+            Console.WriteLine(" Sugar: " + playerOne.playerRecipe.sugarPerPitcher);
+            Console.WriteLine(" Ice Cubes: " + playerOne.playerRecipe.cubesPerPitcher);
+        }
+        public void GetRecipeMenuLogic(int userChoice)
+        {
+            Lemon lemon = new Lemon();
+            IceCube iceCube = new IceCube();
             
         }
         public void GetRecipeLogic(string userInput, Recipe recipe)
@@ -83,14 +98,20 @@ namespace LemonadeFoSale
             switch (userInput)
             {
                 case "l":
-                    SetLemons();
+                    SetLemons(UI.GetUserIntegerInRange("Please select how many lemons you wish to use per pitcher", 0, playerOne.playerStock.Lemons.Count));
+                    Console.Clear();
+                    SetLemonadeRecipe();
                     break;
                 case "s":
+                    SetSugar(UI.GetUserIntegerInRange("Please select how many cups of sugar you wish to use per pitcher", 0, playerOne.playerStock.cupsOfSugar.Count));
+                    Console.Clear();
+                    SetLemonadeRecipe();
                     break;
                 case "i":
-                    break;
-                case "c":
-                    break;
+                    SetIceCubes(UI.GetUserIntegerInRange("Please select how many ice cubes do you wish to use per pitcher", 0, playerOne.playerStock.numberOfCubes.Count));
+                    Console.Clear();
+                    SetLemonadeRecipe();
+                    break;                
                 case "f":
                     break;
                 default:
@@ -99,19 +120,28 @@ namespace LemonadeFoSale
             }
 
         }
-        public void SetLemons()
+        public void SetLemons(int userSelection)
         {
-            playerOne.playerRecipe.lemonsPerPitcher = UI.GetUserIntegerInRange("Please select how many lemons you wish to use per pitcher", 0, playerOne.playerStock.Lemons.Count);
+            playerOne.playerRecipe.lemonsPerPitcher = userSelection;
             playerOne.playerRecipe.AddLemons(playerOne);
 
         }
-        public void SetSugar()
+        public void SetSugar(int userSelection)
+        {
+            playerOne.playerRecipe.sugarPerPitcher= userSelection;
+            playerOne.playerRecipe.AddSugar(playerOne);
+        }
+        public void SetIceCubes(int userSelection)
+        {
+            playerOne.playerRecipe.cubesPerPitcher = userSelection;
+            playerOne.playerRecipe.AddIceCubes(playerOne);
+        }
+        public void FinalizeRecipe()
         {
 
         }
 
-
-    public void DisplayPlayerInventory(Player player)
+        public void DisplayPlayerInventory(Player player)
         {
             
             Console.ForegroundColor = ConsoleColor.Green;
