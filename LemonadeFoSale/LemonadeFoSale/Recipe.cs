@@ -16,13 +16,29 @@ namespace LemonadeFoSale
         public int lemonsPerPitcher;
         public int sugarPerPitcher;
         public int cubesPerPitcher;
+        public List<int> previousRecipeIngredients = new List<int>();
 
         public Recipe()
         {
             
         }
 
-
+        public void GetPreviousRecipe()
+        {
+            previousRecipeIngredients.Clear();
+            previousRecipeIngredients.Add(lemonsPerPitcher);
+            previousRecipeIngredients.Add(sugarPerPitcher);
+            previousRecipeIngredients.Add(cubesPerPitcher);
+        }
+        public void DisplayPreviousRecipe()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" \n Previous Recipe\n******************\n ");
+            Console.ResetColor();
+            Console.WriteLine(" Lemons: " + previousRecipeIngredients[0]);
+            Console.WriteLine(" Cups of Sugar: " + previousRecipeIngredients[1]);
+            Console.WriteLine(" Ice Cubes: " + previousRecipeIngredients[2] + "\n");
+        }
         public void AddLemons(Player player)
         {
             
@@ -50,13 +66,22 @@ namespace LemonadeFoSale
                 player.playerStock.numberOfCubes.RemoveAt(0);
             }
         }
-        public int CreatePitcher()
+        public void CreatePitcher()
         {
-            lemonsPerPitcher = 0;
-            cubesPerPitcher = 0;
-            sugarPerPitcher = 0;
-            numberOfPitchers++;
-            return numberOfPitchers;
+            
+            if (lemonsPerPitcher > 0 && cubesPerPitcher > 0 && sugarPerPitcher > 0)
+            {
+                GetPreviousRecipe();
+                lemonsPerPitcher = 0;
+                cubesPerPitcher = 0;
+                sugarPerPitcher = 0;
+                numberOfPitchers++;
+            }
+            else
+            {
+                Console.WriteLine("Can't create a pitcher with no ingredients. Press any key to continue.");
+                Console.ReadLine();
+            }
             
         }
         public void AddCups(Player player)

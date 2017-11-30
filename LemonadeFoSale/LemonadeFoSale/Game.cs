@@ -49,19 +49,20 @@ namespace LemonadeFoSale
             if (TodaysWeather.TodaysWeatherType == "Rainy" || TodaysWeather.TodaysWeatherType == "Foggy")
             {
                 customerBase = 25;
-                return customerBase;
+                
             }
             else if(TodaysWeather.TodaysTemp <= 65)
             {
                 customerBase = 30;
-                return customerBase;
+                
             }
             else
             {
                 customerBase = 50;
-                return customerBase;
             }
-            
+            return customerBase;
+
+
         }
         public void PopulatePassersby(int customerBase)
         {
@@ -126,9 +127,13 @@ namespace LemonadeFoSale
             Console.WriteLine(" Cups of Sugar: " + playerOne.playerStock.cupsOfSugar.Count);
             Console.WriteLine(" Ice Cubes: " + playerOne.playerStock.numberOfCubes.Count);
             Console.WriteLine(" Paper Cups: " + playerOne.playerStock.numberOfCups.Count + "\n");
+            if(!(playerOne.playerRecipe.previousRecipeIngredients.Count < 3))
+            {
+                playerOne.playerRecipe.DisplayPreviousRecipe();
+            }
             DisplayRecipe();
             Console.WriteLine("\n Let's craft your lemonade recipe\n Note: makes 1 pitcher, which in turn makes up to 20 cups (or as many cups as you have available if < 20))\n");            
-            GetRecipeLogic(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes or 'f' to finalize recipe.", new List<string> { "l", "s", "i","f" }), playerOne.playerRecipe);
+            GetRecipeLogic(DisplayOptions(" Press 'l' to add lemons, 's' to add sugar, 'i' to add ice cubes, 'm' to return to main menu, or 'f' to finalize recipe.", new List<string> { "l", "s", "i","m","f" }), playerOne.playerRecipe);
 
             
         }
@@ -166,8 +171,15 @@ namespace LemonadeFoSale
                     SetIceCubes(UI.GetUserIntegerInRange("Please select how many ice cubes do you wish to use per pitcher", 0, playerOne.playerStock.numberOfCubes.Count));
                     Console.Clear();
                     SetLemonadeRecipe();
-                    break;                
+                    break;
+                case "m":
+                    Console.Clear();
+                    MainScreenDisplay();
+                    break;
                 case "f":
+                    playerOne.playerRecipe.CreatePitcher();
+                    Console.Clear();                    
+                    SetLemonadeRecipe();
                     break;
                 default:
                     break;
@@ -219,7 +231,7 @@ namespace LemonadeFoSale
             {
                 OptionsNavigation(DisplayOptions("\nTo access store, press 's'.", new List<string> { "s" }));
             }
-            else if (playerOne.playerRecipe.numberOfCupsCreated == 0)
+            else if (playerOne.playerRecipe.numberOfPitchers == 0)
             {
                 OptionsNavigation(DisplayOptions("\nTo access store, press 's' or press 'r' to set your recipe.", new List<string> { "s", "r" }));
             }
