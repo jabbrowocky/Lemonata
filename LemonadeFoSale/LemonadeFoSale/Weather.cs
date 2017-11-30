@@ -38,7 +38,7 @@ namespace LemonadeFoSale
 
         public int GetTemperature()
         {
-            TodaysTemp = TemperatureRange.Next(50, 90);
+            TodaysTemp = TemperatureRange.Next(50, 95);
             Console.WriteLine("Today's temperature is {0}°", TodaysTemp);
             return TodaysTemp;
                   

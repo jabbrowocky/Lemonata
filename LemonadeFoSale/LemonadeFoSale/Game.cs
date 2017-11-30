@@ -13,6 +13,7 @@ namespace LemonadeFoSale
         int dayNumber = 1;
         public int NumberOfDays;
         Player playerOne;
+        List<Customer> passersBy = new List<Customer>();
         
 
 
@@ -30,12 +31,57 @@ namespace LemonadeFoSale
         {
           
             TodaysWeather = new Weather();
-            MainScreenDisplay();
+            for (int i = 1; i <= NumberOfDays; i ++)
+            {
+                MainScreenDisplay();
+                RunDay();
+
+            }
+            
             
            
 
         }
-        
+
+        public int CreateCustomers()
+        {
+            int customerBase;
+            if (TodaysWeather.TodaysWeatherType == "Rainy" || TodaysWeather.TodaysWeatherType == "Foggy")
+            {
+                customerBase = 25;
+                return customerBase;
+            }
+            else if(TodaysWeather.TodaysTemp <= 65)
+            {
+                customerBase = 30;
+                return customerBase;
+            }
+            else
+            {
+                customerBase = 50;
+                return customerBase;
+            }
+            
+        }
+        public void PopulatePassersby(int customerBase)
+        {
+            for (int i = 0; i < customerBase; i ++)
+            {
+                passersBy.Add(new Customer());
+            }
+        }
+        public void RunDay()
+        {
+
+            PopulatePassersby(CreateCustomers());
+            for ( int i = 0; i < passersBy.Count; i++)
+            {
+
+            }
+
+        }
+
+
         public void RunStore(Store store)
         {
             Console.Clear();            
@@ -94,6 +140,7 @@ namespace LemonadeFoSale
             Console.WriteLine(" Lemons: " + playerOne.playerRecipe.lemonsPerPitcher);
             Console.WriteLine(" Sugar: " + playerOne.playerRecipe.sugarPerPitcher);
             Console.WriteLine(" Ice Cubes: " + playerOne.playerRecipe.cubesPerPitcher);
+            Console.WriteLine(" Number of pitchers created: {0}", playerOne.playerRecipe.numberOfPitchers);
         }
         public void GetRecipeMenuLogic(int userChoice)
         {
@@ -192,10 +239,6 @@ namespace LemonadeFoSale
             Console.WriteLine("Today's weather : {0}", TodaysWeather.TodaysWeatherType);
             Console.WriteLine("Today's temperature: {0}°", TodaysWeather.TodaysTemp);
             TodaysWeather.DisplayTomorrowsForcast();
-        }
-        public void RunDay()
-        {
-
         }
         
         

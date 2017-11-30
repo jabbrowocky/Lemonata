@@ -10,7 +10,7 @@ namespace LemonadeFoSale
     {
         //member variables
         bool isSatisfied;
-
+        Random customerParameters;
 
         //constructor
         public Customer()
@@ -20,6 +20,10 @@ namespace LemonadeFoSale
 
 
         //member methods
+        public void WillBuy()
+        {
+
+        }
 
     }
 }
