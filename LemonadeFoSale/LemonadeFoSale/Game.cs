@@ -9,7 +9,7 @@ namespace LemonadeFoSale
     public class Game
     {
         //member variables
-        public Weather TodaysWeather;
+        public Weather weather = new Weather();
         int dayNumber;
         public int NumberOfDays;
         public double todaysExpenses;
@@ -29,21 +29,32 @@ namespace LemonadeFoSale
         public Game()
         {
             playerOne = new Player(25.00, new Inventory(new List<Lemon>(), new List<Sugar>(), new List<Cups>(), new List<IceCube>()));
-            UI.DisplayTitleLoop(this);                   
+            UI.DisplayTitleLoop(this);
             
+
         }
 
         //member methods
 
         public void RunGame(int days, string name)
         {
-          
-            TodaysWeather = new Weather();
+            weather.GetTodaysWeather();
+            weather.GetTemperature();
+            weather.GetTomorrowsForcastWeatherType(weather.TodaysWeatherType);
+            weather.GetTomorrowsTemperatureForcast(weather.TodaysTemp);
+            weather.DisplayTomorrowsForcast();
+
             for (dayNumber = 1; dayNumber <= NumberOfDays; dayNumber++)
             {
-                MainScreenDisplay();
-                
+                if (dayNumber > 1)
+                {
+                    weather.GetNextWeatherType();
+                    weather.GetNextTemperature();
+                    weather.GetTomorrowsForcastWeatherType(weather.TodaysWeatherType);
+                    weather.GetTomorrowsTemperatureForcast(weather.TodaysTemp);
 
+                }
+                MainScreenDisplay();
             }
             
             
@@ -52,14 +63,16 @@ namespace LemonadeFoSale
         }
         public void DailyReport()
         {
+            TrackSalesResults();
             GetDayResults();
             TrackExpenses();
             DisplayExpenses();            
-            TrackProfit();
-            DisplayProfit();
+            
+            DisplayProfit(CalculateProfit());
             Console.ReadKey();
+            
         }
-        public void TrackProfit()
+        public void TrackSalesResults()
         {
             todaysProfit = playerOne.playerRecipe.cupsSold * playerOne.playerRecipe.sellCup.standPrice;
         }
@@ -67,11 +80,32 @@ namespace LemonadeFoSale
         {
             Console.WriteLine("Out of {0} potential customers {1} purchased lemonade.", passersBy.Count, playerOne.playerRecipe.cupsSold);
             passersBy.Clear();
-        }
-        public void DisplayProfit()
-        {
-
             Console.WriteLine("You sold {0} cups for a total of {1:C2}", playerOne.playerRecipe.cupsSold, (todaysProfit));
+        }
+        public double CalculateProfit()
+        {
+            double profitMargin;
+            
+            
+                profitMargin = todaysProfit - todaysExpenses;
+                return profitMargin;
+            
+
+        }
+        public void DisplayProfit(double profitMargin)
+        {
+            if (todaysProfit > todaysExpenses)
+            {
+                Console.WriteLine("You gained {0:C2}", profitMargin);
+            }
+            else
+            {
+                Console.WriteLine("You lost {0:C2}", profitMargin);
+            }
+            
+            
+
+            
             
         }
         public void TrackExpenses()
@@ -95,12 +129,12 @@ namespace LemonadeFoSale
         public int CreateCustomers()
         {
             int customerBase;
-            if (TodaysWeather.TodaysWeatherType == "Rainy" || TodaysWeather.TodaysWeatherType == "Foggy")
+            if (weather.TodaysWeatherType == "Rainy" || weather.TodaysWeatherType == "Foggy")
             {
                 customerBase = 25;
                 
             }
-            else if(TodaysWeather.TodaysTemp <= 65)
+            else if(weather.TodaysTemp <= 65)
             {
                 customerBase = 30;
                 
@@ -129,9 +163,9 @@ namespace LemonadeFoSale
                 else
                 {
                     Console.WriteLine("You ran out of cups to sell.");
-                    
+                    return;
                 }
-                
+                return;
             }
             Console.ReadKey();
         }
@@ -158,12 +192,14 @@ namespace LemonadeFoSale
             Console.WriteLine("You have {0} cups available for purchase at {1:C2} per cup, press any key to start day.", playerOne.playerRecipe.CupsToSell.Count, playerOne.playerRecipe.sellCup.standPrice);
             Console.ReadKey();
 
-
-
             PopulatePassersby(CreateCustomers());
             MakesPurchase();
             DailyReport();
             playerOne.playerRecipe.CupsToSell.Clear();
+            playerOne.lemonsPurchased = 0;
+            playerOne.sugarPurchased = 0;
+            playerOne.cupsPurchased = 0;
+            playerOne.cupsPurchased = 0;
             
 
         }
@@ -366,9 +402,9 @@ namespace LemonadeFoSale
             Console.WriteLine("Day to Day information:\n****************************\n");
             Console.ResetColor();
             Console.WriteLine("Day number: " + dayNumber);
-            Console.WriteLine("Today's weather : {0}", TodaysWeather.TodaysWeatherType);
-            Console.WriteLine("Today's temperature: {0}°", TodaysWeather.TodaysTemp);
-            TodaysWeather.DisplayTomorrowsForcast();
+            Console.WriteLine("Today's weather : {0}", weather.TodaysWeatherType);
+            Console.WriteLine("Today's temperature: {0}°", weather.TodaysTemp);
+            weather.DisplayTomorrowsForcast();
         }
         
         

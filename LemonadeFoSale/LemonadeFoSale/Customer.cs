@@ -20,7 +20,23 @@ namespace LemonadeFoSale
             if (player.playerRecipe.sellCup.standPrice < .40)
             {
                buyingCustomer=customerParameters.Next(0, 100);
-                if (buyingCustomer % 2 == 0)
+                if (buyingCustomer % 2 == 0 || buyingCustomer % 3 == 0)
+                {
+                    WillBuy();
+                }
+            }
+            else if(player.playerRecipe.sellCup.standPrice >= .40 && player.playerRecipe.sellCup.standPrice <= .85)
+            {
+                buyingCustomer = customerParameters.Next(0, 100);
+                if (buyingCustomer % 2 == 0 && buyingCustomer % 3 == 0)
+                {
+                    WillBuy();
+                }
+            }
+            else if(player.playerRecipe.previousRecipeIngredients[1]<3 || player.playerRecipe.previousRecipeIngredients[0] > 1)
+            {
+                buyingCustomer = rnd.Next(0,5);
+                if (buyingCustomer == 2 || buyingCustomer == 3)
                 {
                     WillBuy();
                 }

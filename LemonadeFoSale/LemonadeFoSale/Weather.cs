@@ -21,11 +21,7 @@ namespace LemonadeFoSale
         //constructor
         public Weather()
         {
-            GetTodaysWeather();
-            GetTemperature();
-            GetTomorrowsForcastWeatherType(TodaysWeatherType);
-            GetTomorrowsTemperatureForcast(TodaysTemp);
-            DisplayTomorrowsForcast();           
+                
         }
 
         //member methods
@@ -65,7 +61,12 @@ namespace LemonadeFoSale
         }
         public void GetNextTemperature()
         {
-
+            TodaysTemp = TomorrowsTemperatureForcast;
+            
+        }
+        public void GetNextWeatherType()
+        {
+            TodaysWeatherType = TomorrowsWeatherTypeForcast;
         }
     }
     

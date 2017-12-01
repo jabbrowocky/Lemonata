@@ -91,7 +91,7 @@ namespace LemonadeFoSale
         {
             
             sellCup.standPrice = sellPrice;
-            for (int i = 1; i <= numberOfCupsCreated; i ++)
+            for (int i = 0; i < numberOfCupsCreated; i ++)
             {
                 CupsToSell.Add(sellCup);
             }
