@@ -52,21 +52,27 @@ namespace LemonadeFoSale
         }
         public void DailyReport()
         {
-            Console.WriteLine("Out of {0} potential customers {1} purchased lemonade.", passersBy.Count, playerOne.playerRecipe.cupsSold);
-            passersBy.Clear();
+            GetDayResults();
             TrackExpenses();
-            Console.WriteLine("Today's expenses: {0:C2}",todaysExpenses);
-            
-            Console.WriteLine("You sold {0} cups for a total of {1:C2}", playerOne.playerRecipe.cupsSold, (playerOne.playerRecipe.cupsSold * playerOne.playerRecipe.sellCup.standPrice));
+            DisplayExpenses();            
+            TrackProfit();
+            DisplayProfit();
             Console.ReadKey();
         }
         public void TrackProfit()
         {
-
+            todaysProfit = playerOne.playerRecipe.cupsSold * playerOne.playerRecipe.sellCup.standPrice;
+        }
+        public void GetDayResults()
+        {
+            Console.WriteLine("Out of {0} potential customers {1} purchased lemonade.", passersBy.Count, playerOne.playerRecipe.cupsSold);
+            passersBy.Clear();
         }
         public void DisplayProfit()
         {
 
+            Console.WriteLine("You sold {0} cups for a total of {1:C2}", playerOne.playerRecipe.cupsSold, (todaysProfit));
+            
         }
         public void TrackExpenses()
         {
@@ -79,7 +85,7 @@ namespace LemonadeFoSale
         }
         public void DisplayExpenses()
         {
-
+            Console.WriteLine("Today's expenses: {0:C2}", todaysExpenses);
         }
         public void SetYesterdaysExpenses()
         {
@@ -157,7 +163,7 @@ namespace LemonadeFoSale
             PopulatePassersby(CreateCustomers());
             MakesPurchase();
             DailyReport();
-            
+            playerOne.playerRecipe.CupsToSell.Clear();
             
 
         }
@@ -176,7 +182,7 @@ namespace LemonadeFoSale
         
         public void ConsumePitcher(int userInput, double sellPrice)
         {
-            if (userInput > 1 && playerOne.playerStock.numberOfCups.Count < 21)
+            if (userInput >= 1 && playerOne.playerStock.numberOfCups.Count < 21)
             {
                 playerOne.playerRecipe.AddCups(playerOne, sellPrice);
                 Console.WriteLine("You only had enough cups to use 1 pitcher you have {0} left", playerOne.playerRecipe.numberOfPitchers);

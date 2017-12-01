@@ -75,7 +75,7 @@ namespace LemonadeFoSale
             if (lemonsPerPitcher > 0 && cubesPerPitcher > 0 && sugarPerPitcher > 0)
             {
                 GetPreviousRecipe();
-                lemonsPerPitcher = 0;//easiest point to track expenses
+                lemonsPerPitcher = 0;
                 cubesPerPitcher = 0;
                 sugarPerPitcher = 0;
                 numberOfPitchers++;
