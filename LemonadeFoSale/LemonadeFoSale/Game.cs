@@ -10,11 +10,16 @@ namespace LemonadeFoSale
     {
         //member variables
         public Weather TodaysWeather;
-        int dayNumber = 1;
+        int dayNumber;
         public int NumberOfDays;
+        public double originalTotal = 25;
+        public double previousTotal;
         Player playerOne;
+        Random rnd = new Random();
+       
         List<Customer> passersBy = new List<Customer>();
         
+
 
 
         //constructor
@@ -31,15 +36,26 @@ namespace LemonadeFoSale
         {
           
             TodaysWeather = new Weather();
-            for (int i = 1; i <= NumberOfDays; i ++)
+            for (dayNumber = 1; dayNumber <= NumberOfDays; dayNumber++)
             {
-                MainScreenDisplay();                
-                NumberOfDays--;
+                MainScreenDisplay();
+                
+
             }
             
             
            
 
+        }
+        public void DailyReport()
+        {
+            Console.WriteLine("Out of {0} potential customers {1} purchased lemonade.", passersBy.Count, playerOne.playerRecipe.cupsSold);
+            passersBy.Clear();
+            
+            
+            
+            Console.WriteLine("You sold {0} cups for a total of {1:C2}", playerOne.playerRecipe.cupsSold, (playerOne.playerRecipe.cupsSold * playerOne.playerRecipe.sellCup.standPrice));
+            Console.ReadKey();
         }
 
         public int CreateCustomers()
@@ -63,12 +79,38 @@ namespace LemonadeFoSale
 
 
         }
+        public void MakesPurchase()
+        {
+            foreach(Customer potentialCustomer in passersBy)
+            {
+                if (playerOne.playerRecipe.CupsToSell.Count > 0)
+                {
+                    if (potentialCustomer.willBuy == true)
+                    {
+                        playerOne.playerRecipe.CupsToSell.RemoveAt(0);
+                        playerOne.playerRecipe.cupsSold++;
+                        playerOne.availableFunds += playerOne.playerRecipe.sellCup.standPrice;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You ran out of cups to sell.");
+                    
+                }
+                
+            }
+            Console.ReadKey();
+        }
+
         public void PopulatePassersby(int customerBase)
         {
             for (int i = 0; i < customerBase; i ++)
             {
-                passersBy.Add(new Customer());
+                Customer potentialCustomer = new Customer(playerOne, rnd);
+                                              
+                passersBy.Add(potentialCustomer);
             }
+           
         }
         public void RunDay()
         {
@@ -79,17 +121,30 @@ namespace LemonadeFoSale
             int pitcherInput = UI.GetUserIntegerInRange("How many pitchers would you like use? You have " + playerOne.playerRecipe.numberOfPitchers + " available", 1, playerOne.playerRecipe.numberOfPitchers);
             double userPrice = UI.GetUserDoubleInRange("At what price would you like to sell your cups of lemonade?", 0, 5);
             ConsumePitcher(pitcherInput, userPrice);
-            Console.WriteLine("You have {0} cups available for purchase at {1} per cup", playerOne.playerRecipe.CupsToSell.Count, playerOne.playerRecipe.sellCup.standPrice);
-            Console.ReadKey();        
+            Console.WriteLine("You have {0} cups available for purchase at {1} per cup, press any key to start day.", playerOne.playerRecipe.CupsToSell.Count, playerOne.playerRecipe.sellCup.standPrice);
+            Console.ReadKey();
 
-           
+
+
             PopulatePassersby(CreateCustomers());
-            for ( int i = 0; i < passersBy.Count; i++)
-            {
-
-            }
+            MakesPurchase();
+            DailyReport();
+            
+            
 
         }
+        //public void WillBuyCheck()
+        //{
+        //    foreach (Customer potentialCustomer in passersBy)
+        //    {
+        //        if (potentialCustomer.willBuy == true)
+        //        {
+        //            Console.WriteLine("a customer made a purchase");
+        //            Console.ReadKey();
+        //        }
+
+        //    }
+        //}
         
         public void ConsumePitcher(int userInput, double sellPrice)
         {
@@ -137,7 +192,7 @@ namespace LemonadeFoSale
         {
 
             int numberOfDays;                      
-            numberOfDays = int.Parse(UI.ValidateInput("\n Please set the number of days (7, 14, or 21)" , new List<string>() {"7","14","21" }));
+            numberOfDays = int.Parse(UI.ValidateInput("\n Please set the number of days you'd like to play for. (7, 14, or 21)" , new List<string>() {"7","14","21" }));
             NumberOfDays = numberOfDays;
             
             return NumberOfDays;
@@ -176,12 +231,7 @@ namespace LemonadeFoSale
             Console.WriteLine(" Ice Cubes: " + playerOne.playerRecipe.cubesPerPitcher);
             Console.WriteLine(" Number of pitchers created: {0}", playerOne.playerRecipe.numberOfPitchers);
         }
-        public void GetRecipeMenuLogic(int userChoice)
-        {
-            Lemon lemon = new Lemon();
-            IceCube iceCube = new IceCube();
-            
-        }
+        
         public void GetRecipeLogic(string userInput, Recipe recipe)
         {
             switch (userInput)
@@ -264,11 +314,14 @@ namespace LemonadeFoSale
            
             if (playerOne.playerRecipe.numberOfPitchers == 0)
             {
-                OptionsNavigation(DisplayOptions("\nTo access store, press 's' or press 'r' to set your recipe.", new List<string> { "s", "r" }));
+                OptionsNavigation(DisplayOptions("\nTo access store, press 's' or press 'r' to set your recipe menu.", new List<string> { "s", "r" }));
             }
             else
             {
-                OptionsNavigation(DisplayOptions("\nTo access store press 's' or press 'r' to set your recipe, or press 'd' to begin the day.", new List<string> { "s", "r", "d" }));
+                Console.WriteLine("Press 's' to buy more supplies, press 'r' to access your recipe menu");
+                Console.WriteLine("       or press 'd' to begin the day");
+                string userInput = Console.ReadLine();
+                OptionsNavigation(userInput);
             }
 
         }
@@ -309,7 +362,7 @@ namespace LemonadeFoSale
                     break;
                 case "d":
                     RunDay();
-                    break;               
+                    break;
                 default:
                     break;
 

@@ -63,6 +63,10 @@ namespace LemonadeFoSale
         {
             Console.WriteLine("Tomorrow's weather forcast: {0} and {1}°", TomorrowsWeatherTypeForcast, TomorrowsTemperatureForcast);
         }
+        public void GetNextTemperature()
+        {
+
+        }
     }
     
 

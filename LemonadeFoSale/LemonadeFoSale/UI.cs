@@ -40,7 +40,7 @@ namespace LemonadeFoSale
             titleScroll.Add("  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
             musicplayer.MenuMusic();
-            for (int j = 0; j <= titleScroll.Count() - 1; j++)
+            for (int j = 0; j < titleScroll.Count(); j++)
             {
 
                 Console.ForegroundColor = TitleColorRandomizer();
