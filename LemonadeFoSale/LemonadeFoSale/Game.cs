@@ -12,10 +12,13 @@ namespace LemonadeFoSale
         public Weather TodaysWeather;
         int dayNumber;
         public int NumberOfDays;
-        public double originalTotal = 25;
-        public double previousTotal;
+        public double todaysExpenses;
+        public double previousExpenses;
+        public double todaysProfit;
+        public double previousProfit;        
         Player playerOne;
         Random rnd = new Random();
+        Store store = new Store();
        
         List<Customer> passersBy = new List<Customer>();
         
@@ -51,11 +54,36 @@ namespace LemonadeFoSale
         {
             Console.WriteLine("Out of {0} potential customers {1} purchased lemonade.", passersBy.Count, playerOne.playerRecipe.cupsSold);
             passersBy.Clear();
-            
-            
+            TrackExpenses();
+            Console.WriteLine("Today's expenses: {0:C2}",todaysExpenses);
             
             Console.WriteLine("You sold {0} cups for a total of {1:C2}", playerOne.playerRecipe.cupsSold, (playerOne.playerRecipe.cupsSold * playerOne.playerRecipe.sellCup.standPrice));
             Console.ReadKey();
+        }
+        public void TrackProfit()
+        {
+
+        }
+        public void DisplayProfit()
+        {
+
+        }
+        public void TrackExpenses()
+        {
+            Sugar purchasedSugar = new Sugar();
+            IceCube purchasedIce = new IceCube();
+            Cups purchasedCups = new Cups();
+            Lemon purchasedLemons = new Lemon();
+
+            todaysExpenses = (playerOne.icePurchased * purchasedIce.iceUnitPrice)+(playerOne.lemonsPurchased * purchasedLemons.UnitPrice)+(playerOne.cupsPurchased * purchasedCups.UnitPrice) + (playerOne.sugarPurchased * purchasedSugar.unitPrice);
+        }
+        public void DisplayExpenses()
+        {
+
+        }
+        public void SetYesterdaysExpenses()
+        {
+
         }
 
         public int CreateCustomers()
@@ -121,7 +149,7 @@ namespace LemonadeFoSale
             int pitcherInput = UI.GetUserIntegerInRange("How many pitchers would you like use? You have " + playerOne.playerRecipe.numberOfPitchers + " available", 1, playerOne.playerRecipe.numberOfPitchers);
             double userPrice = UI.GetUserDoubleInRange("At what price would you like to sell your cups of lemonade?", 0, 5);
             ConsumePitcher(pitcherInput, userPrice);
-            Console.WriteLine("You have {0} cups available for purchase at {1} per cup, press any key to start day.", playerOne.playerRecipe.CupsToSell.Count, playerOne.playerRecipe.sellCup.standPrice);
+            Console.WriteLine("You have {0} cups available for purchase at {1:C2} per cup, press any key to start day.", playerOne.playerRecipe.CupsToSell.Count, playerOne.playerRecipe.sellCup.standPrice);
             Console.ReadKey();
 
 
@@ -165,7 +193,7 @@ namespace LemonadeFoSale
         }
 
 
-        public void RunStore(Store store)
+        public void RunStore()
         {
             Console.Clear();            
             Console.Write("\n");
@@ -354,7 +382,7 @@ namespace LemonadeFoSale
                     break;
                 case "s":
                     Console.Clear();
-                    RunStore(new Store());
+                    RunStore();
                     break;
                 case "r":
                     Console.Clear();

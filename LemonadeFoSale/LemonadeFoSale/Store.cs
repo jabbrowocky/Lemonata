@@ -189,18 +189,21 @@ namespace LemonadeFoSale
             Lemon lemon = new Lemon();
             player.playerStock.Lemons.Add(lemon);
             player.availableFunds = Math.Round((player.availableFunds - lemon.UnitPrice),2);
+            player.lemonsPurchased++;
         }
         public void PurchaseSugar(Player player)
         {
             Sugar sugar = new Sugar();
             player.playerStock.cupsOfSugar.Add(sugar);
             player.availableFunds = Math.Round((player.availableFunds - sugar.unitPrice),2);
+            player.sugarPurchased++;
         }
         public void PurchaseCups(Player player)
         {
             Cups cup = new Cups();
             player.playerStock.numberOfCups.Add(cup);
             player.availableFunds = Math.Round((player.availableFunds - cup.UnitPrice),2);
+            player.cupsPurchased++;
         }
         public void PurchaseCubes(Player player)
         {
@@ -209,6 +212,7 @@ namespace LemonadeFoSale
             player.playerStock.numberOfCubes.Add(cubes);
             player.playerStock.numberOfCubes.Add(cubes);
             player.availableFunds = Math.Round((player.availableFunds - cubes.iceUnitPrice),2);
+            player.icePurchased++;
         }
     }
 }

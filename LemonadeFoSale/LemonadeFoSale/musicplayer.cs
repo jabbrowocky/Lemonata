@@ -16,7 +16,7 @@ namespace LemonadeFoSale
         {
              
             System.Media.SoundPlayer titleLoop = new System.Media.SoundPlayer();
-            titleLoop.SoundLocation = @"C:\Users\DalekMyBalls\Desktop\DevCodeCamp\c#\LemonadeRightHurr\lemonata\LemonadeFoSale\LemonadeFoSale\POL-magical-sun-short.wav";
+            titleLoop.SoundLocation = /*C:\Users\DalekMyBalls\Desktop\DevCodeCamp\c#\LemonadeRightHurr\lemonata\LemonadeFoSale\LemonadeFoSale*/"POL-magical-sun-short.wav";
             titleLoop.PlayLooping();
                
         }
