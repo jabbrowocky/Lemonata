@@ -43,7 +43,7 @@ namespace LemonadeFoSale
             for (int j = 0; j < titleScroll.Count(); j++)
             {
 
-                Console.ForegroundColor = TitleColorRandomizer();
+                Console.ForegroundColor = TitleColorRandomizer(game.rnd);
                 Console.WriteLine(titleScroll[j]);
 
                 Console.ResetColor();
@@ -64,17 +64,13 @@ namespace LemonadeFoSale
 
         }
 
-        static public ConsoleColor TitleColorRandomizer()
+        static public ConsoleColor TitleColorRandomizer(Random rnd)
         {
-            Random rndColor = new Random();
-            return titleColors[rndColor.Next(0, 6)];
+            
+            return titleColors[rnd.Next(0, 6)];
         }
         
-        static public ConsoleColor FuckYouRick()
-        {
-            return ConsoleColor.Yellow;
-        }
-
+        
         static public void DisplayMainMenu(Game game)
         {
             Console.Clear();

@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Cups.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="db.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="highscoresDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -86,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="highscoresDataSet.xsc">
       <DependentUpon>highscoresDataSet.xsd</DependentUpon>
     </None>

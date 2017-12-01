@@ -17,7 +17,7 @@ namespace LemonadeFoSale
         public double todaysProfit;
         public double previousProfit;        
         Player playerOne;
-        Random rnd = new Random();
+        public Random rnd = new Random();
         Store store = new Store();
        
         List<Customer> passersBy = new List<Customer>();
