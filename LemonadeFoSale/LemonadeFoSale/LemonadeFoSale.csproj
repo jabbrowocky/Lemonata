@@ -62,11 +62,6 @@
     <Compile Include="Customer.cs" />
     <Compile Include="db.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="highscoresDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>highscoresDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="IceCube.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Lemon.cs" />
@@ -88,30 +83,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="highscoresDataSet.xsc">
-      <DependentUpon>highscoresDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="highscoresDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>highscoresDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="highscoresDataSet.xss">
-      <DependentUpon>highscoresDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="highscores.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="highscores_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>highscores.mdf</DependentUpon>
-    </Content>
     <Content Include="POL-magical-sun-short.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
